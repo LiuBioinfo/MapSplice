@@ -1,0 +1,107 @@
+#include <iostream>
+#include <map>
+#include <cstdlib>
+#include <cstdio>
+#include <unistd.h>
+#include "othelloV7.h"
+#include "muloth.h"
+#include <chrono>
+#include <inttypes.h>
+using namespace std;
+typedef unsigned long long keyT;
+typedef uint8_t valueT;
+    
+vector<keyT> keys;
+    vector<valueT> values;
+
+bool lineToKVpair(char *s, keyT * k, valueT *v) {
+    switch (*s) {
+        case 'A':
+        case 'T':
+        case 'G':
+        case  'C' : 
+            keyT ret = 0;
+            while (*s == 'A' || *s == 'C' || *s =='T' || *s =='G') {
+                ret <<=2;
+                switch (*s) {
+                    case 'G': ret ++; 
+                    case 'T': ret ++;
+                    case 'C': ret ++;
+                }
+                s++;
+            }
+            *k = ret;
+            valueT tv;
+            sscanf(s,"%d",&tv);
+            *v = tv;
+            return true;
+
+    }
+    return false;
+}
+void add(char * fname) {
+    printf("Reading file %s \n" , fname);
+    FILE *pFile;
+    pFile = fopen (fname,"r");
+    uint64_t cnt = 0 ;
+    while (true) {
+        char buf[1024];
+        if (fgets(buf,1024,pFile)==NULL) break;
+        keyT k;
+        valueT v;
+        if (!lineToKVpair(buf, &k , &v)) break;
+        keys.push_back(k); 
+        values.push_back(v);
+        cnt++;
+    }
+    fclose(pFile);
+    printf("key cnt %lld; tot key %lld \n", cnt, keys.size());
+}
+
+void test(char * fname, MulOth<keyT,valueT> & moth) {
+}
+
+int main(int argc, char * argv[]) {
+    if (argc < 3) {
+        printf(" splitbits file1 file2 file3 .... \n");
+        printf(" splitbits: a number <=16, divide the keys into 2^(splitbits) sets, according to the Least (splitbit) significant bits. \n");
+        return 0;
+    }
+
+    printf("Reading files ...\n");
+    for (int i = 2; i< argc; i++) {
+        add (argv[i]);
+    }
+    int splitbit;
+    sscanf(argv[1],"%d",&splitbit);
+    printf("Split %d groups\n",1U<< splitbit); 
+    //for (int i = 0 ; i < keys.size(); i++) {
+    //    printf("%" PRIx64 "-> %d\n", keys[i], values[i]);
+    //}
+    MulOth<keyT,valueT> moth(&keys[0],&values[0],keys.size(),splitbit);
+    printf("Build Succ\n");
+    for (int i = 2; i< argc; i+=2) {
+    printf("Testing using keys from file %s\n" , fname);
+    FILE *pFile;
+    pFile = fopen (fname,"r");
+    uint64_t cnt = 0 ;
+    while (true) {
+        char buf[1024];
+        if (fgets(buf,1024,pFile)==NULL) break;
+        keyT k;
+        valueT v;
+        if (!lineToKVpair(buf, &k , &v)) break;
+        valueT qv = moth.query(k);
+        if (qv !=v ) {
+            printf("Err %"PRIx64"->%d: %d\n", k,v,qv);
+            fclose(pFile);
+        }
+    //    printf("%" PRIx64"--> %d\n", k,v);
+           
+    }
+    fclose(pFile);
+    printf("Test Succ\n");
+        test (argv[i], moth);
+    }
+    return 0;
+}

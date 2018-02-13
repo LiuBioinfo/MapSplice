@@ -1,0 +1,51 @@
+1.
+fixHeadTail.h:
+
+if mismatches generated when fixIndel at ends, insert mismatch vec 2 alignInfo
+
+ 
+2. 
+fixHeadTail nwdpBesideReadEnd
+
+3.
+when detecting circular RNAs, 
+enable remapping, target mapping, greedy mapping .... in fixHeadTail,
+rewrite the newAlignInfo generating problem
+
+in align_info.h:
+
+newAlignInfoAfterAddHeadInfo2SoftClippingAlignment_new(
+
+as "splice Junction Distance < 0" can be introduced by circular RNA
+
+4.
+
+ make sure MPS3 is using alignInferJuncHash
+
+
+5. to do 09/12/2015
+
+a). For cirRNA:
+
+i). make MPS3_cirRNA favor normal alignments instead of reporting all possible ones including back-splicing reads;
+
+ii). write a script to reFormat alignment results: split back-splice reads to make it avaliable to visualize them through IGV;
+
+iii). generate cirRNA transcirpts and its read count, them call DESeq2 to do differentially analysis on the three samples.
+
+b). For Fusion:
+
+i). simulate fusion transcripts with FUSIM;
+
+ii). simulate reats from both normal reads and fusion reads.
+
+6. to do 09/18/2015
+
+For Gene Count: (alignAll_geneCount.cpp)
+
+i). initiate_andGenerateGeneSetInfo() in transcript2geneMap_info.h
+
+ii). peAlignInfo_transcript.doGeneCount() in alignAll_geneCount.cpp
+
+
+

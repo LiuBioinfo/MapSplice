@@ -1,0 +1,265 @@
+12/27/2014
+
+add a function of checking shortAnchorHeadSeqToTargetMapping and shortAnchorTailSeqToTargetMappping trustable or not
+
+
+12/29/2014
+
+add a function of checking each segSeq trustable or not
+
+
+01/23/2015
+
+To do list:
+
+1. support SE & mergedPE
+
+2. limit size of arrayList;
+
+
+02/02/2015
+
+fixed a bug in 'read length' (fixUnpaired) 
+
+To do list:
+
+
+04/11/2015
+
+when mismatch found in read ends, even no enough bases to support, still extend the alignment to ends.
+
+
+04/14/2015
+
+when read maintain unmapped, try to find a indel beside the ends, and complete the alignment, which can complete 1% partial alignments 
+
+04/19/2015
+
+1. implement getSmallExon
+
+2. implement getAlignInfer (compatible with multi path for each SJ)
+
+05/07/2015
+
+1. apply NWDP to one-end open problem 
+2. implement getShortAnchorSJfromAlignment_doDirectExtension
+
+05/28/2015
+
+1. implemented several programs to classify SJ based on multi splice site anchor similarity and direct extension sequence similarity 
+
+getAlignInferJuncHashFromJuncFile:
+getAlignInferJuncHashFromSAMfile:
+getAlignInferJuncHashFromJuncFile_doAlterSpliceSite:
+getAlignInferJuncHashFromSAMfile_doAlterSpliceSite:
+getAlignInferJuncHashFromSAMfile_doAlterSpliceSite_classifySJ:
+getAlignInferJuncHashFromJuncfile_withAlterSpliceSiteAnchorSimilarity:
+refineSAM:
+refineSAM_withAlignInferJuncHash_withAlterSpliceSiteAnchorSimilarity:
+
+06/08/2015
+
+1.in fixDoubleAnchorInsertion_info.h
+Note: when scanning bases, will be out of chrom boundary in some cases.
+
+scanGenomeAndReadSeq:
+
+before:
+
+		int tmpDonerMapCumulativeMismatchNum = 0;
+		donerMapCumulativeMismatchNumVec.push_back(0);
+		for(int tmp = 0; tmp < toFix_read_length; tmp++)
+		{
+			char charInRef = indexInfo->returnOneBaseCharInGenome(chrNameInt, toFix_chrom_start + tmp);
+
+		.......
+
+		for(int tmp = 0; tmp < toFix_read_length; tmp++)
+		{
+			char charInRef = indexInfo->returnOneBaseCharInGenome(chrNameInt, toFix_chrom_end - tmp);
+
+
+
+after:
+		int tmpDonerMapCumulativeMismatchNum = 0;
+		donerMapCumulativeMismatchNumVec.push_back(0);
+		//cout << "transcript seq length: " << indexInfo->returnChromLength(chrNameInt) << endl;
+		int tmpChromLength = indexInfo->returnChromLength(chrNameInt);
+		for(int tmp = 0; tmp < toFix_read_length; tmp++)
+		{
+			//cout << "tmpBase: " << tmp << endl;
+			int tmpBasePosInChr = toFix_chrom_start + tmp;
+			if(tmpBasePosInChr > tmpChromLength)
+				break;
+			char charInRef = indexInfo->returnOneBaseCharInGenome(chrNameInt, toFix_chrom_start + tmp);
+
+		......
+
+		for(int tmp = 0; tmp < toFix_read_length; tmp++)
+		{
+			if(toFix_chrom_end - tmp < 1)
+				break;
+			char charInRef = indexInfo->returnOneBaseCharInGenome(chrNameInt, toFix_chrom_end - tmp);
+
+
+2. in seg_info.h
+Note:
+
+getFirstLongSegNO:
+
+
+06/24/2015
+
+1. process SE, stats for SE mapping
+
+2. check cirRNA, extract circular splice site from alignment, (make it available)
+
+3. 
+
+08/02/2015
+
+Note:
+segInfo:
+mapMain_SegInfo_preIndex_repeatRegion_keepMissingLongSeg(:
+	.......
+		segmentNum = (norSegmentNum);
+		mapMain = true;
+
+		// Xinan: fixMe: some potential bugs -- segmentLength > read length, to fix
+		//int tmpSegLengthSum = 0;
+		for(int tmpSeg = 0; tmpSeg < segmentNum; tmpSeg++)
+		{
+			//tmpSegLengthSum = tmpSegLengthSum + norSegmentLength[tmpSeg]
+			if(norSegmentLength[tmpSeg] > readLength)
+			{
+				segmentNum = 0;
+				norSegmentNum = 0;
+				return false;
+	 		}
+		}
+		return mapMain;
+	}
+
+09/20/2015
+
+Note:
+to check:
+1. extractBackSpliceFromAllJunc:
+	g++ $(CFLAGS) -o $(OUTPUTDIR)extractBackSpliceFromAllJunc src/otherProjects/cirRNA/extractBackSpliceFromAllJunc.cpp
+
+2. countSplicedAlignmentNum:
+	g++ $(CFLAGS) -o $(OUTPUTDIR)countSplicedAlignmentNum src/MPS3SeqTools/countSplicedAlignmentNum.cpp
+
+to Check:
+1. in unfixedHead.h
+
+10/16/2015
+
+Note:
+bug fixed:
+1. reformBackSpliceSAM:
+	getStartLocInReadOfSpecificJumpCode()
+
+before:
+
+int getStartLocInReadOfSpecificJumpCode(
+	vector<Jump_Code>& cigarStringJumpCodeVec, int jumpCodeIndex)
+{
+	int lastJumpCodeEndLocInRead;
+	if(jumpCodeIndex == 0)
+		return 1;
+	else
+		lastJumpCodeEndLocInRead = getEndLocInReadOfSpecificJumpCode(
+			cigarStringJumpCodeVec, jumpCodeIndex - 1) + 1;
+	int tmpStartLocInRead = lastJumpCodeEndLocInRead + 1;
+	return tmpStartLocInRead;
+}
+
+after:
+
+int getStartLocInReadOfSpecificJumpCode(
+	vector<Jump_Code>& cigarStringJumpCodeVec, int jumpCodeIndex)
+{
+	int lastJumpCodeEndLocInRead;
+	if(jumpCodeIndex == 0)
+		lastJumpCodeEndLocInRead = 0;
+	else
+		lastJumpCodeEndLocInRead = getEndLocInReadOfSpecificJumpCode(
+			cigarStringJumpCodeVec, jumpCodeIndex - 1);
+	int tmpStartLocInRead = lastJumpCodeEndLocInRead + 1;
+	return tmpStartLocInRead;
+}
+
+11/04/2015
+Note:
+possible bug
+motivation:
+in lowError_50:
+groundTruth:
+seq.955024/1    16      chr4    125885968       255     50M     *       0       0       CACACCTTTAATCCCAGCACTCCGGAGGCAGAGGCAGGTGGATTTCTGAG       **************************************************      NM:i:0  MD:Z:50
+seq.955024/2    0       chr4    125885878       255     50M     *       0       0       TTTTTCTTTTTTTGGTCTATTCGAGACAGGGTTTCTCTGTGTAGCCCTGG       **************************************************      NM:i:0  MD:Z:50
+rawReads:
+>seq.955024/1
+CACACCTTTAATCCCAGCACTCCGGAGGCAGAGGCAGGTGGATTTCTGAG
+>seq.955024/2
+TTTTTCTTTTTTTGGTCTATTCGAGACAGGGTTTCTCTGTGTAGCCCTGG
+
+in seg_info.h
+	bool mapMain_SegInfo_preIndex_repeatRegion_keepMissingLongSeg(
+
+before:
+			    	if(interval_begin > interval_end)
+			    	{
+			    		//cout << "interval_begin > interval_end" << endl;
+			    		queryFound = false;
+			    		stop_loc = c-1;
+	          			segment_align_SArange[0] = interval_begin_ori;
+	            		segment_align_SArange[1] = interval_end_ori;       		
+	            		segment_align_rangeNum = interval_end_ori - interval_begin_ori + 1;		    			
+			    		break;
+			    	}
+			    	else
+			    	{
+			    		//cout << "interval_begin <= interval_end" << endl;
+	          			segment_align_SArange[0] = interval_begin;
+	            		segment_align_SArange[1] = interval_end;
+	            		segment_align_rangeNum = interval_end - interval_begin + 1; // == 1
+			    	}
+
+after:
+			    	if(interval_begin > interval_end)
+			    	{
+			    		//cout << "interval_begin > interval_end" << endl;
+			    		queryFound = false;
+			    		stop_loc = c;//c-1;// fixed 11/04/2015
+	          			segment_align_SArange[0] = interval_begin_ori;
+	            		segment_align_SArange[1] = interval_end_ori;       		
+	            		segment_align_rangeNum = interval_end_ori - interval_begin_ori + 1;		    			
+			    		break;
+			    	}
+			    	else
+			    	{
+			    		//cout << "interval_begin <= interval_end" << endl;
+	          			segment_align_SArange[0] = interval_begin;
+	            		segment_align_SArange[1] = interval_end;
+	            		segment_align_rangeNum = interval_end - interval_begin + 1; // == 1
+			    	}
+
+04/28/2016
+Note:
+to implement splice junction detection with multiple references
+
+1/1/2018
+
+Note:
+currently no insertion allowed
+
+fixDoubleAnchorFusion_info.h:
+
+before:
+if(tmpDonerLength + tmpAcceptorLength > toFixSeqLength + ALLOWED_DELETION_IN_READ_DUETO_DREAMCHALLENGE_SIMULATIONERROR)
+		continue;
+
+after:
+if(tmpDonerLength + tmpAcceptorLength != toFixSeqLength)// + ALLOWED_DELETION_IN_READ_DUETO_DREAMCHALLENGE_SIMULATIONERROR)
+		continue;

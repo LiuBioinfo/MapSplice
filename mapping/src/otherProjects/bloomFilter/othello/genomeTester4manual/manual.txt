@@ -1,0 +1,55 @@
+I[lcph222@dlxlogin2-1 bin]$ ./glistquery
+Error: Missing a list file!
+Usage: glistquery <INPUTLIST> [OPTIONS]
+Options:
+    -v, --version             - print version information and exit
+    -h, --help                - print this usage screen and exit
+    -stat                     - print statistics of the list file and exit
+    -median                   - print min/max/median/average and exit
+    -q, --query               - single query word
+    -f, --queryfile           - list of query words in a file
+    -s, --seqfile             - FastA/FastQ file
+    -l, --listfile            - list file made by glistmaker
+    -mm, --mismatch NUMBER    - specify number of mismatches (default 0, can be used with -d and -dd)
+    -p, --perfectmatch NUMBER - specify number of 3' perfect matches (default 0)
+    -min, --minfreq NUMBER    - minimum frequency of the printed words (default 0)
+    -max, --maxfreq NUMBER    - maximum frequency of the printed words (default MAX_UINT)
+    -all                      - in case of mismatches prints all found words
+    -D                        - increase debug level
+
+
+[lcph222@dlxlogin2-1 bin]$ ./glistcompare
+Error: Missing one or both list files!
+Usage: glistcompare <INPUTLIST1> <INPUTLIST2> [OPTIONS]
+Options:
+    -v, --version            - print version information and exit
+    -h, --help               - print this usage screen and exit
+    -u, --union              - union of input lists
+    -i, --intersection       - intersection of input lists
+    -d, --difference         - difference of input lists
+    -dd, --double_difference - double difference of input lists
+    -du, --diff_union        - subtract first list from the second and finds difference
+    -mm, --mismatch   NUMBER - specify number of mismatches (default 0, can be used with -diff and -ddiff)
+    -c, --cutoff NUMBER      - specify frequency cut-off (default 1)
+    -o, --outputname STRING  - specify output name (default "out")
+    -r, --rule STRING        - specify rule how final frequencies are calculated (default, add, subtract, min, max, first, second, 1, 2)
+                               NOTE: rules min, subtract, first and second can only be used with finding the intersection.
+    -ss --subset METHOD SIZE - make subset with given method (rand_unique)
+    --count_only             - output count of k-mers instead of k-mers themself
+    --disable_scouts         - disable list read-ahead in background thread
+    -D                       - increase debug level
+
+
+[lcph222@dlxlogin2-1 bin]$ ./glistmaker
+Error: No FastA/FastQ file specified!
+Usage: glistmaker <INPUTFILES> [OPTIONS]
+Options:
+    -v, --version           - print version information and exit
+    -h, --help              - print this usage screen and exit
+    -w, --wordlength NUMBER - specify index wordsize (1-32) (default 16)
+    -c, --cutoff NUMBER     - specify frequency cut-off (default 1)
+    -o, --outputname STRING - specify output name (default "out")
+    --num_threads           - number of threads the program is run on (default MIN(8, num_input_files))
+    --max_tables            - maximum number of temporary tables (default MAX(num_threads, 2))
+    --table_size            - maximum size of the temporary table (default 500000000)
+    -D                      - increase debug level
