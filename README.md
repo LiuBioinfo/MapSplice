@@ -85,3 +85,6 @@ upstream exon ends at position chr1: 12227;
 downstream exon starts at position chr1: 12613;
 involoved intronic region is chr1: 12226 ~ 12612;
 supporting read number is 10. -->
+
+### License
+Please refer to LICENSE.txt
