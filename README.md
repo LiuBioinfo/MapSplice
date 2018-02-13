@@ -34,35 +34,35 @@ Note: before building index, you need to put all the sequence files of reference
 
 Command Line:
      
-    ```
-    ./buildIndex <path-to-chromosomes-folder> <path-to-index-folder>
-    ```
+```
+./buildIndex <path-to-chromosomes-folder> <path-to-index-folder>
+```
 
 Example:
-     
-    ```
-    ./buildIndex /PATH/hg19/ /PATH/index/
-    ```
+ 
+```
+./buildIndex /PATH/hg19/ /PATH/index/
+```
 
 ## 2. Map reads onto reference genome.
 
 Installation:
 
-     Go to directory "mapping", and run "make mps".
+Go to directory "mapping", and run "make mps".
 
 Running: all the parameters are required.
 
-    Command Line:
+Command Line:
 
-    ```
-    ./mps -J -G <path-to-index> -1 <read-end1> -2 <read-end2> -T <threads-num> -O <output-folder>
-    ```
+```
+./mps -J -G <path-to-index> -1 <read-end1> -2 <read-end2> -T <threads-num> -O <output-folder>
+```
     
-    Example:
+Example:
     
-    ```
-    ./mps -J -G /PATH/index/ -1 /PATH/read_end1.fa -2 /PATH/read_end2.fa -T 16 -O /PATH/mps3_results/
-    ```
+```
+./mps -J -G /PATH/index/ -1 /PATH/read_end1.fa -2 /PATH/read_end2.fa -T 16 -O /PATH/mps3_results/
+```
 
 #How to interpret MapSplice3 results:
 
