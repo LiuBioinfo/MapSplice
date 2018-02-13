@@ -96,10 +96,10 @@ public:
 		string transcript_type = "NULL";
 		SNP_seq_index_provided_bool = false;
 		segMap2SNPmer_phase_defined_bool = false;
-		sharedThreadForIO_bool = false;
+		sharedThreadForIO_bool = true; // no need to set -J
 		readFileIn_listFile_or_commandLine_bool = false;
 		sharing_splicing_context_bool = false;
-		sharing_SNP_context_bool = false;
+		sharing_SNP_context_bool = true; // no need to set -B
 		stopLearningSNP_bool = false;
 		stopLearningSplicing_bool = false;
 		updateChrSeqWithSNPonly_avoidSegMap2SNPmer_bool = false;
