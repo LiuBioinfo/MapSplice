@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 
 bool DO_REMAPPING_DuringFirstMapping= false;
 bool BUILD_SPLICE_HASH_FROM_FILE = true;

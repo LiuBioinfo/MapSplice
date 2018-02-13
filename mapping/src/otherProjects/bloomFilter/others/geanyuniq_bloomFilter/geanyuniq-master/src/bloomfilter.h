@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 /*
  * A Bloom Filter implementation, on top of glib. The assumed data is 0-terminated
  * strings of characters.

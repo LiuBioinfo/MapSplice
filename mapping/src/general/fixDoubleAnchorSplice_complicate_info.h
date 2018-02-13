@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 #ifndef FIXDOUBLEANCHORSPLICE_COMPLICATE_INFO_H
 #define FIXDOUBLEANCHORSPLICE_COMPLICATE_INFO_H
 

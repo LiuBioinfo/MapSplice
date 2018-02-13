@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 // input:  backSplice counts files from different groups or samples;
 // output: read counts for merged backSplices (for some backSplices, read counts may be 0 for some samples)
 

@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 // input: SJinfoTable from compareSJfromMultiSamples output
 // output: unannotated SJ num, unannotated SJ supportingReadNum distribution in each region along the refGenome
 #include <stdio.h>

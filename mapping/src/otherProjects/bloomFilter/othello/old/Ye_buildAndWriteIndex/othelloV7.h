@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 #ifndef __OTHELLO_V3_H
 #define __OTHELLO_V3_H
 //Supports Othello remote update

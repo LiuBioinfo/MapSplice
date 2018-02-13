@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 #ifndef CHECKMAPPEDLENGTHINFO_H
 #define CHECKMAPPEDLENGTHINFO_H
 

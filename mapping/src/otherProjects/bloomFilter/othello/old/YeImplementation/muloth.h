@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 #ifndef __MUL_OTH_H
 #define __MUL_OTH_H
 #include "othelloV7.h"

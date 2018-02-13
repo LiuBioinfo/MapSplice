@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 //chr1    lincRNA gene    29554   31109   .       +       .       gene_id "ENSG00000243485"; gene_name "MIR1302-10"; gene_source "ensembl_havana"; gene_biotype "lincRNA";
 //chr1    lincRNA transcript      29554   31097   .       +       .       gene_id "ENSG00000243485"; transcript_id "ENST00000473358"; gene_name "MIR1302-10"; gene_source "ensembl_havana"; gene_biotype "lincRNA"; transcript_name "MIR1302-10-001"; transcript_source "havana";
 //chr1    lincRNA exon    29554   30039   .       +       .       gene_id "ENSG00000243485"; transcript_id "ENST00000473358"; exon_number "1"; gene_name "MIR1302-10"; gene_source "ensembl_havana"; gene_biotype "lincRNA"; transcript_name "MIR1302-10-001"; transcript_source "havana"; exon_id "ENSE

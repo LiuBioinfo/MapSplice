@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 #ifndef TRANSCRIPT_COUNT_VEC_H
 #define TRANSCRIPT_COUNT_VEC_H
 

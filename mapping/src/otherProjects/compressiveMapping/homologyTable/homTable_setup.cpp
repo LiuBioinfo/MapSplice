@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 /*Copyright (c) 2015-2016 Deniz Yorukoglu. All rights reserved.*/
 #include <iostream>
 #include <fstream>

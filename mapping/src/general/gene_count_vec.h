@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 #ifndef GENE_COUNT_VEC_H
 #define GENE_COUNT_VEC_H
 

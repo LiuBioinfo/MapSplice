@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 #ifndef KMER2SORTEDKMER_INFO_H
 #define KMER2SORTEDKMER_INFO_H
 #include <stdio.h>

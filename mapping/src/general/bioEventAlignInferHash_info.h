@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 #ifndef BIOEVENTALIGNINFERHASH_INFO_H
 #define BIOEVENTALIGNINFERHASH_INFO_H
 

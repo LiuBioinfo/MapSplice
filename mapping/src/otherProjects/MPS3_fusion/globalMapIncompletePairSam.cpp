@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 //Note: this program is used to do global mapping for headSoftclipped sequence in
 // uniquePairedAlignment to detect fusion
 // Note: no header section in input SAM file

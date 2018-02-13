@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 // input: backSplice read count from all samples
 // format: chrName, chrPos_right, chrPos_left, rawReadCount_1, rawReadCount_2, .....
 // output: chrName, chrPos_right, chrPos_left, rawReadCount_1, rawReadCount_2, ... rawReadCount_N, 

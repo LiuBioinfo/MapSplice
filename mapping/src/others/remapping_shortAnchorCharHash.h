@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 //#include "splice_info.h"
 //#define SPLICE_MIN_LENGTH 50
 //#define FIX_SPLICE_BUFFER 5

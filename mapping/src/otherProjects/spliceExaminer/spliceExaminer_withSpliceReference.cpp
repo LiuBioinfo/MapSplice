@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 // classify junctions into 3 categories.
 // category -- true: annotated
 // category -- false: junc with reverse strands, 0-editDistance anchorSeqs

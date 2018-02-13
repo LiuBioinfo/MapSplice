@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 // step1: sam2junc
 // step2: global detection -> break point file
 // step3: generate fusion junc from global detection results (break point file)

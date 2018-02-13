@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 //Note: this program is used to stitch up all the sub-programs for fusion detection
 // Note: no header section in input SAM file
 #include <stdio.h>

@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 // used to get size for each exon
 #include <stdio.h>
 #include <stdlib.h>

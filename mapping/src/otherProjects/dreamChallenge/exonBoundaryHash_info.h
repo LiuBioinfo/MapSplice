@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 #ifndef ExonBoundaryHash_info_H
 #define	ExonBoundaryHash_info_H
 

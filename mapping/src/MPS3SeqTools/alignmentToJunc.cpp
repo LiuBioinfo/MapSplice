@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 // input: SAM files
 // output: SJ  
 // (chr_name pos_donerEnd pos_acceptorStart SJ_name 

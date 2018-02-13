@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 #ifndef LOCAL_SEG_INFO_H
 #define LOCAL_SEG_INFO_H
 

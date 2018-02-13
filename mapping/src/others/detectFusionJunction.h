@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 typedef map< pair<int, int>, pair<int, vector< pair<int, int> > > > CandidateFusionMap;
 // pair<int, int> (left-end readMapPos2ndLevelNO, right-end readMapPos2ndLevelNO), pair<int, pair<int,int> > (voting score, pair<1stEndRead_endMapPos, 2ndEndRead_startMapPos>)    
 typedef map< int, vector<pair<int, pair<int, int> > > > FusionEndSet; // <int, int> (2ndLevelIndexNO_1, (2ndLevelIndexNO_2, 1stEndRead_endMapPos_max) )

@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 //used to compare two alignment results, especailly the aligner's results and grount truth
 // 0 -- exactly the same, perfect
 // 1 -- totally different

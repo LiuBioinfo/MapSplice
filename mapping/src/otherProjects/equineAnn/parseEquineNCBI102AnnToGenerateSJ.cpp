@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 // inputAnn: /scratch/xli262/yizhang/Emma/new_annotation/102/ref_EquCab2.0_top_level.gff3
 // inputChrNameAccession: /scratch/xli262/yizhang/Emma/new_annotation/102/chr_accessions.txt 
 #include <stdio.h>

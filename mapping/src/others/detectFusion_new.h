@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 //#include "otherFunc.h"
 
 typedef map< pair<int, int>, pair<int, vector< pair<int, int> > > > CandidateFusionMap;

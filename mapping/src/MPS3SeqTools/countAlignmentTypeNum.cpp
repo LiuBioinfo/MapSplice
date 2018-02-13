@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 //used to check aligment type number (unsplied, single-spliced, multi-spliced) for primary ones
 #include <stdio.h>
 #include <stdlib.h>

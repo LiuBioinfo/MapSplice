@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 #include <string>
 #include <string.h>
 //#include "splice_info.h"

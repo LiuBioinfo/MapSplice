@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 #ifndef BATCH_MANAGER_INFO_H
 #define BATCH_MANAGER_INFO_H
 

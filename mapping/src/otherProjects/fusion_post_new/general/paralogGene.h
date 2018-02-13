@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 // paralogGeneStr: group_id NB_Genes Gene_Name
 
 #ifndef PARALOGGENE_H

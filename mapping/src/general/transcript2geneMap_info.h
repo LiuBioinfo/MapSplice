@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 #ifndef TRANSCRIPT2GENEMAP_INFO_H
 #define TRANSCRIPT2GENEMAP_INFO_H
 

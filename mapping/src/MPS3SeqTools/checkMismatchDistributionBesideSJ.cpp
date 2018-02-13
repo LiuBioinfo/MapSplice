@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 //input: SAM file
 //mismatch distribution beside SJ:
 //mismatch[0...max_distaceInRead]

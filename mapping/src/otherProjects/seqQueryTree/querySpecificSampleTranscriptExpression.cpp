@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 // merged sailfish results
 // Transcript_id\sample_id sample_1 sample_2 ... sample_N
 // Transcript_1 tpm(readNum)_1_1 tpm(readNum)_1_2 ... tpm(readNum)_1_N  

@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 #ifndef SPECIES_INFO_H
 #define SPECIES_IFNO_H
 #include <stdio.h>

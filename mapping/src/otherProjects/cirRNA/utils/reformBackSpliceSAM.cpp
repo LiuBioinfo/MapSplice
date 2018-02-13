@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 // input -- original SAM format alignment results generated from MPS3_cirRNA
 // output -- reformed alignments results: split back-splice alignments into several alignments,
 // each alignment represents each segment

@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 //used to count reads number within and overlap each region in a list.
 //input region list format: chrName buildRefName(like hg19) regionType(like exon) startPos endPos ....... 
 //output_detailed readCount format: < original string in input region list > 

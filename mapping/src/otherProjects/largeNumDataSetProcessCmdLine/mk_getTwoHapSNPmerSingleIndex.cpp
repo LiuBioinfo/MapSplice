@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 // cd /home/lcph222/Xinan/MPS3/mapping/ ./cmpTwoHaplotypeSNP
 // cat > twoHap_SNP.txt
 // cd /home/lcph222/Xinan/mps/imps_github/mps-master/code ./generateSyntheticSNPgenomSeq

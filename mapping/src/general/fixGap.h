@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 
 bool fixHead(Splice_Info* headCigarInfo, unsigned int* segmentLocInRead, char* read, char* chrom, string strand, 
 	unsigned int mainFirstFragmentMapPos, int valSegStartNo, unsigned int* mapPos, const string& readString, int readLength,

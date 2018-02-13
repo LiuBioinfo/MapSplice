@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 //**************************************************************************************//
 //step 1: take SNP files and indexes (chrom only) as input, 
 //        and initiate the indexInfo, and get the new chrStr for each chromosome

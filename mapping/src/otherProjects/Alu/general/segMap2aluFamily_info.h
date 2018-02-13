@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 #ifndef SEGMAP2ALUFAMILY_INFO_H
 #define SEGMAP2ALUFAMILY_INFO_H
 

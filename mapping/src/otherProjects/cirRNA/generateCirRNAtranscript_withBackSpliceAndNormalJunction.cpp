@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 // input: 1 -- backSplice junctions;
 // 		  2 -- normalSplice junctions
 // output: cirRNA transcript and their read counts

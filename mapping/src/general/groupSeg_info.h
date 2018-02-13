@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 #ifndef GROUPSEG_INFO_H
 #define GROUPSEG_INFO_H
 

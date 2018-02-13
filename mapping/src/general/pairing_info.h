@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 #ifndef PAIRING_INFO_H
 #define PAIRING_INFO_H
 

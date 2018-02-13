@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 // input: annotated SJ file, SJ from each sample
 // output: a table of overall info for all SJs
 #include <stdio.h>

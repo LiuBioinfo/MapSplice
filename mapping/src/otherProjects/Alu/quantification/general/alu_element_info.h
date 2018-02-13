@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 #ifndef ALU_ELEMENT_INFO_H
 #define ALU_ELEMENT_INFO_H
 

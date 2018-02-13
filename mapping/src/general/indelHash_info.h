@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 #ifndef INDELHASH_INFO_H
 #define INDELHAHS_INFO_H
 

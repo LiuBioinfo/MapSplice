@@ -1,3 +1,4 @@
+// This file is a part of MapSplice3. Please refer to LICENSE.TXT for the LICENSE
 #ifndef __IO_HELPER_H
 #define __IO_HELPER_H
 
