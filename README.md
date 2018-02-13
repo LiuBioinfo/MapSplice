@@ -28,7 +28,7 @@ Note: before building index, you need to put all the sequence files of reference
 
 
 ## Installation:
-     Go to directory "indexing", and run "make buildIndex".
+Go to directory "indexing", and run "make buildIndex".
 
 ## Running: 
 
