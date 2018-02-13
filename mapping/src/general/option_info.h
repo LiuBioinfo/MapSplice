@@ -79,9 +79,11 @@ public:
 	bool avoid_creating_folder_bool;
 
 	bool report_sam_only_bool;
+
+	bool keep_tmp_bool;
 	Option_Info()
 	{
-		optionStr = "W:1:2:S:G:L:T:F:O:M:I:Z:P:Q:R:U:Y:D:C:7ABEXNJKH345";
+		optionStr = "W:1:2:S:G:L:T:F:O:M:I:Z:P:Q:R:U:Y:D:C:7ABEXNJKH3456";
 		SE_or_PE_bool = false;
 		Do_phase1_only_bool = false;
 		annotation_provided_bool = false;
@@ -109,6 +111,13 @@ public:
 
 		avoid_creating_folder_bool = false;
 		report_sam_only_bool = false;
+
+		keep_tmp_bool = false;
+	}
+
+	bool return_keep_tmp_bool()
+	{
+		return keep_tmp_bool;
 	}
 
 	bool return_report_sam_only_bool()
@@ -237,6 +246,7 @@ public:
 			{"backSplice-search", 0, NULL, '3'},
 			{"fusion-search", 0, NULL, '4'},
 			{"report-sam-only", 0, NULL, '5'},
+			{"keep-tmp", 0, NULL, '6'},
 			{NULL, 0, NULL, 0},
 		};		
 		char ch;
@@ -434,6 +444,9 @@ public:
 			    case '5':
 			    	report_sam_only_bool = true;
 			    	break;
+			    case '6':
+			    	keep_tmp_bool = true;
+			    	break;			    	
 			    default:
 			        printf("other option:%c\n",ch);
 		    }

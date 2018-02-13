@@ -63,8 +63,8 @@ Example:
 ```
 ./mps -G /PATH/index/ -1 /PATH/read_end1.fa -2 /PATH/read_end2.fa -T 16 -O /PATH/mps3_results/
 ```
-
-#How to interpret MapSplice3 results:
+<!---
+# How to interpret MapSplice3 results:
 
 Two result files are generated:
 
@@ -84,4 +84,4 @@ describes a splice junction whose:
 upstream exon ends at position chr1: 12227;
 downstream exon starts at position chr1: 12613;
 involoved intronic region is chr1: 12226 ~ 12612;
-supporting read number is 10. 
+supporting read number is 10. -->
