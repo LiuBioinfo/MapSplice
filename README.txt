@@ -1,23 +1,22 @@
-MapSplice3 Manual
+#MapSplice3 
+
+__MapSplice3__ is an spliced aligner. It maps RNA-seq onto reference genome, and can be used to detect splice junctions, gene fusions, and circular RNAs.
+
+## System Requirements
+iMapSplice has been tested on Linux platforms with the following system settings.
+  * Red Hat 4.4.5-6
+  * gcc version 4.9.1
+
+#Manual
 
 There are two subfolders in the package: "indexing" and "mapping".
 
 Code in subfolder "indexing" is used to build index.
 Code in subfolder "mapping" is used to perform the spliced alignment.
 
-
-/**********************************************************************/
-/**********************************************************************/
-The current version MapSplice3 is tested in the following environment:
-OS: Linux Red Hat 4.4.6-3
-Compiler: g++ 4.4.6
-
-
-/**********************************************************************/
-/**********************************************************************/
 How to run MapSplice3?
 
-1. Build index for MapSplice3.
+##1. Build index for MapSplice3.
 
 Note: before building index, you need to put all the sequence files of reference genome into a directory (like /PATH/hg19/). And all the sequence files are required to be in the following format:
 
@@ -28,35 +27,38 @@ Note: before building index, you need to put all the sequence files of reference
 (5) No other files in the same folder.
 
 
-Installation:
+##Installation:
      Go to directory "indexing", and run "make buildIndex".
 
-Running: 
+##Running: 
 
-     Command Line: 
-         ./buildIndex <path-to-chromosomes-folder> <path-to-index-folder>
+     Command Line:
+     ```
+     ./buildIndex <path-to-chromosomes-folder> <path-to-index-folder>
+     ```
 
-     Example: 
-         ./buildIndex /PATH/hg19/ /PATH/index/
+     Example:
+     ```
+     ./buildIndex /PATH/hg19/ /PATH/index/
+     ```
 
-
-2. Map reads onto reference genome.
+##2. Map reads onto reference genome.
 
 Installation:
      Go to directory "mapping", and run "make mps".
 
 Running: all the parameters are required.
 
-     Command Line: 
+     Command Line:
+     ```
          ./mps -J -G <path-to-index> -1 <read-end1> -2 <read-end2> -T <threads-num> -O <output-folder>
-
-     Example: 
+     ```
+     Example:
+     ```
          ./mps -J -G /PATH/index/ -1 /PATH/read_end1.fa -2 /PATH/read_end2.fa -T 16 -O /PATH/mps3_results/
+     ```
 
-
-/**********************************************************************/
-/**********************************************************************/
-How to interpret MapSplice3 results:
+#How to interpret MapSplice3 results:
 
 Two result files are generated:
 
