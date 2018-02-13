@@ -49,14 +49,14 @@ Installation:
 
 Running: all the parameters are required.
 
-     Command Line:
-     ```
-         ./mps -J -G <path-to-index> -1 <read-end1> -2 <read-end2> -T <threads-num> -O <output-folder>
-     ```
-     Example:
-     ```
-         ./mps -J -G /PATH/index/ -1 /PATH/read_end1.fa -2 /PATH/read_end2.fa -T 16 -O /PATH/mps3_results/
-     ```
+    Command Line:
+    ```
+    ./mps -J -G <path-to-index> -1 <read-end1> -2 <read-end2> -T <threads-num> -O <output-folder>
+    ```
+    Example:
+    ```
+    ./mps -J -G /PATH/index/ -1 /PATH/read_end1.fa -2 /PATH/read_end2.fa -T 16 -O /PATH/mps3_results/
+    ```
 
 #How to interpret MapSplice3 results:
 
