@@ -3,7 +3,7 @@
 __MapSplice3__ is an spliced aligner. It maps RNA-seq onto reference genome, and can be used to detect splice junctions, gene fusions, and circular RNAs.
 
 ## System Requirements
-iMapSplice has been tested on Linux platforms with the following system settings.
+MapSplice3 has been tested on Linux platforms with the following system settings.
   * Red Hat 4.4.5-6
   * gcc version 4.9.1
 
