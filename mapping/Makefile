@@ -5,6 +5,18 @@ OUTPUTDIR = ./
 
 CFLAGS += $(OPTFLAGS) -fopenmp
 
+mps:
+	g++ $(CFLAGS) -o $(OUTPUTDIR)mps src/mps_arrayList.cpp
+	g++ $(CFLAGS) -o $(OUTPUTDIR)buildSNPmerIndex_embeded_mps_nonBatch src/otherProjects/indexing/utils/build_snpMerIndex.cpp
+	g++ $(CFLAGS) -o $(OUTPUTDIR)reportJunc_embeded src/otherProjects/utilities/reportJunc_embeded.cpp
+	g++ $(CFLAGS) -o $(OUTPUTDIR)removeFalseJuncSam src/otherProjects/utilities/removeFalseJuncSam.cpp
+
+mps_circRNA:
+	g++ $(CFLAGS) -D DETECT_CIRCULAR_RNA -o $(OUTPUTDIR)mps_circRNA src/mps_arrayList.cpp
+	g++ $(CFLAGS) -o $(OUTPUTDIR)buildSNPmerIndex_embeded_mps_nonBatch src/otherProjects/indexing/utils/build_snpMerIndex.cpp
+	g++ $(CFLAGS) -o $(OUTPUTDIR)reportJunc_embeded src/otherProjects/utilities/reportJunc_embeded.cpp
+	g++ $(CFLAGS) -o $(OUTPUTDIR)removeFalseJuncSam src/otherProjects/utilities/removeFalseJuncSam.cpp
+
 mps_arrayList:
 	g++ $(CFLAGS) -o $(OUTPUTDIR)mps_arrayList src/mps_arrayList.cpp
 	g++ $(CFLAGS) -o $(OUTPUTDIR)buildSNPmerIndex_embeded_mps_nonBatch src/otherProjects/indexing/utils/build_snpMerIndex.cpp
@@ -15,12 +27,6 @@ mps_arrayList_backSpliceIncluded:
 	g++ $(CFLAGS) -D DETECT_CIRCULAR_RNA -o $(OUTPUTDIR)mps_arrayList_backSpliceIncluded src/mps_arrayList.cpp
 	g++ $(CFLAGS) -o $(OUTPUTDIR)buildSNPmerIndex_embeded_mps_nonBatch src/otherProjects/indexing/utils/build_snpMerIndex.cpp
 	g++ $(CFLAGS) -o $(OUTPUTDIR)reportJunc_embeded src/otherProjects/utilities/reportJunc_embeded.cpp
-
-mps:
-	g++ $(CFLAGS) -o $(OUTPUTDIR)mps src/mps_arrayList.cpp
-	g++ $(CFLAGS) -o $(OUTPUTDIR)buildSNPmerIndex_embeded_mps_nonBatch src/otherProjects/indexing/utils/build_snpMerIndex.cpp
-	g++ $(CFLAGS) -o $(OUTPUTDIR)reportJunc_embeded src/otherProjects/utilities/reportJunc_embeded.cpp
-	g++ $(CFLAGS) -o $(OUTPUTDIR)removeFalseJuncSam src/otherProjects/utilities/removeFalseJuncSam.cpp
 
 mps_backSpliceIncluded:
 	g++ $(CFLAGS) -D DETECT_CIRCULAR_RNA -o $(OUTPUTDIR)mps_backSpliceIncluded src/mps_arrayList.cpp
@@ -911,6 +917,10 @@ assignRedCloverGeneName2ASM:
 	g++ $(CFLAGS) -o $(OUTPUTDIR)assignRedCloverGeneName2ASM src/otherProjects/manohar/assignRedCloverGeneName2ASM.cpp
 
 #BEGIN MPS3_paper
+
+reformatOtherAlignerReportJunc2mps3format:
+	g++ $(CFLAGS) -o $(OUTPUTDIR)reformatOtherAlignerReportJunc2mps3format src/otherProjects/MPS3_paper/utils/reformatOtherAlignerReportJunc2mps3format.cpp
+
 count_alignmentTypeNum_softClipBaseNum_fixedLength:
 	g++ $(CFLAGS) -o $(OUTPUTDIR)count_alignmentTypeNum_softClipBaseNum_fixedLength src/otherProjects/MPS3_paper/count_alignmentTypeNum_softClipBaseNum_fixedLength.cpp
 
