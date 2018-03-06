@@ -136,7 +136,11 @@ int main(int argc, char** argv)
 {
 	if(argc != 5)
 	{
-		cout << "Executable supNumMin paralogGeneFile inputRawMPS3fusionResults outputFilteredFusionResultsPrefix" << endl;
+		cout << "#0 Executable" << endl;
+		cout << "#1 supNumMin" << endl;
+		cout << "#2 paralogGeneFile" << endl; 
+		cout << "#3 inputRawMPS3fusionResults" << endl;
+		cout << "#4 outputFilteredFusionResultsPrefix" << endl;
 		exit(1);
 	}
 
