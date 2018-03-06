@@ -407,7 +407,9 @@ int main(int argc, char**argv)
 
 		string tmpJuncStr = indexInfo->returnChrNameStr(tmpSJ_chrNameInt) + "\t"
 			+ int_to_str(tmpSJ_donerEndPos) + "\t" + int_to_str(tmpSJ_acceptorStartPos) + "\t"
-			+ "JUNC_" + int_to_str(tmp+1) + "\t" + int_to_str(tmpSJ_supportNum) + "\t"
+			//+ "JUNC_" + int_to_str(tmp+1) 
+			+ tmpSJ_flankString
+			+ "\t" + int_to_str(tmpSJ_supportNum) + "\t"
 			+ int_to_str(tmpSJ_anchorSize_doner) + "\t" + int_to_str(tmpSJ_anchorSize_acceptor) + "\t"
 			+ int_to_str(tmpSJ_XMmin) + "\t" + int_to_str(tmpSJ_XMmax) + "\t" + tmpSJ_flankString + "\t";
 		bool lowSupportNumNonCanonical_bool = inconfidentSJ_lowSupportNumNonCanonical_bool(tmpSJ_flankString, tmpSJ_supportNum);
@@ -498,7 +500,7 @@ int main(int argc, char**argv)
 	parameter_ifs.close();
 
 	string finalSimplifiedJuncFile = argv[5];
-	string cut_cmd = "cut -f 1,2,3,5 " + outputSJstr_withAnchorSeqSimilarity_kept + " > "
+	string cut_cmd = "cut -f 1,2,3,4,5 " + outputSJstr_withAnchorSeqSimilarity_kept + " > "
 		+ finalSimplifiedJuncFile;
 	system(cut_cmd.c_str());
 	return 0;
