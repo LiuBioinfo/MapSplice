@@ -950,21 +950,26 @@ int main(int argc, char**argv)
 					tmpSecondLevelChrom[tmpMallocSpace] = '0';
 				secondLevelChrom_file_ifs.read((char*)tmpSecondLevelChrom, sizeOfIndex * sizeof(char));
 				if(tmpSecondLevelChrom[sizeOfIndex-1] != 'X')
+        {  
 					indexInfo->insert2invalidSecondLevelIndexNOset(secondLevelIndexNO + 1);
-
+          log_ofs << "invalid index: " << endl << inputIndexFileStr << endl;
+        }
 				bool No_ATGC_Bool = true;
-				for(int tmpMallocSpace = 0; tmpMallocSpace < sizeOfIndex; tmpMallocSpace++)
-				{
-					char ch = tmpSecondLevelChrom[tmpMallocSpace];
-					if((ch == 'A')||(ch == 'T')||(ch == 'G')||(ch == 'C'))
-					{
-						No_ATGC_Bool = false;
-						break;
-					}
-				}				
-				if(No_ATGC_Bool)
-					indexInfo->insert2invalidSecondLevelIndexNOset(secondLevelIndexNO + 1);
-				secondLevelChrom.push_back(tmpSecondLevelChrom);				
+  			for(int tmpMallocSpace = 0; tmpMallocSpace < sizeOfIndex; tmpMallocSpace++)
+  			{
+  				char ch = tmpSecondLevelChrom[tmpMallocSpace];
+  				if((ch == 'A')||(ch == 'T')||(ch == 'G')||(ch == 'C'))
+  				{
+  					No_ATGC_Bool = false;
+  					break;
+  				}
+  			}				
+  			if(No_ATGC_Bool)
+  			{
+        	indexInfo->insert2invalidSecondLevelIndexNOset(secondLevelIndexNO + 1);
+				  log_ofs << "invalid index: " << endl << inputIndexFileStr << endl;
+        }
+        secondLevelChrom.push_back(tmpSecondLevelChrom);				
 				unsigned int* tmpSecondLevelSa = (unsigned int*)malloc(sizeOfIndex * sizeof(unsigned int));
 				secondLevelSA_file_ifs.read((char*)tmpSecondLevelSa, sizeOfIndex * sizeof(unsigned int));
 				secondLevelSa.push_back(tmpSecondLevelSa);
@@ -1454,48 +1459,91 @@ int main(int argc, char**argv)
 		string cat_cmd;
 		if(!SE_or_PE_bool)
 		{	
-      cout << "tmpHeadSectionInfo: " << tmpHeadSectionInfo << endl;
-      cout << "tmpAlignCompleteRead: " << tmpAlignCompleteRead << endl;
-      cout << "OutputSamFile_oneEndMapped: " << OutputSamFile_oneEndMapped << endl;
-      cout << "OutputSamFile_fixHeadTail_complete_pair: " << OutputSamFile_fixHeadTail_complete_pair << endl;
-      cout << "OutputSamFile_fixHeadTail_incomplete_pair: " << OutputSamFile_fixHeadTail_incomplete_pair << endl;
-      cout << "OutputSamFile_fixHeadTail_complete_unpair: " << OutputSamFile_fixHeadTail_complete_unpair << endl;
-      cout << "OutputSamFile_fixHeadTail_incomplete_unpair: " << OutputSamFile_fixHeadTail_incomplete_unpair << endl;
-      cout << "OutputSamFile_oneEndMapped_unpair: " << OutputSamFile_oneEndMapped_unpair << endl;
-      cout << "tmpAlignBothEndsUnmapped_mappedToRepeatRegionFile: " << tmpAlignBothEndsUnmapped_mappedToRepeatRegionFile << endl;
-      cout << "tmpAlignBothEndsUnmapped_lowScore: " << tmpAlignBothEndsUnmapped_lowScore << endl;
-      cout << "OutputSamFile_oneEndMapped_bothEndsUnmapped_lowScore: " << OutputSamFile_oneEndMapped_bothEndsUnmapped_lowScore << endl;
-      cout << "OutputSamFile_fixHeadTail_pair_lowScore: " << OutputSamFile_fixHeadTail_pair_lowScore << endl;
-      cout << "tmpAlignBothEndsUnmapped: " << tmpAlignBothEndsUnmapped << endl;
-      cout << "finalOutputSam: " << finalOutputSam << endl;
-			cat_cmd = "cat " + tmpHeadSectionInfo + " " + tmpAlignCompleteRead + " " + OutputSamFile_oneEndMapped + " " + OutputSamFile_fixHeadTail_complete_pair
-				+ " " + OutputSamFile_fixHeadTail_incomplete_pair + " " + OutputSamFile_fixHeadTail_complete_unpair + " " + OutputSamFile_fixHeadTail_incomplete_unpair
-				+ " " + OutputSamFile_oneEndMapped_unpair + " " + tmpAlignBothEndsUnmapped_mappedToRepeatRegionFile + " " + tmpAlignBothEndsUnmapped_lowScore
-				+ " " + OutputSamFile_oneEndMapped_bothEndsUnmapped_lowScore + " " + OutputSamFile_fixHeadTail_pair_lowScore
-				+ " " + tmpAlignBothEndsUnmapped + " > " + finalOutputSam;
+      // cout << "tmpHeadSectionInfo: " << tmpHeadSectionInfo << endl;
+      // cout << "tmpAlignCompleteRead: " << tmpAlignCompleteRead << endl;
+      // cout << "OutputSamFile_oneEndMapped: " << OutputSamFile_oneEndMapped << endl;
+      // cout << "OutputSamFile_fixHeadTail_complete_pair: " << OutputSamFile_fixHeadTail_complete_pair << endl;
+      // cout << "OutputSamFile_fixHeadTail_incomplete_pair: " << OutputSamFile_fixHeadTail_incomplete_pair << endl;
+      // cout << "OutputSamFile_fixHeadTail_complete_unpair: " << OutputSamFile_fixHeadTail_complete_unpair << endl;
+      // cout << "OutputSamFile_fixHeadTail_incomplete_unpair: " << OutputSamFile_fixHeadTail_incomplete_unpair << endl;
+      // cout << "OutputSamFile_oneEndMapped_unpair: " << OutputSamFile_oneEndMapped_unpair << endl;
+      // cout << "tmpAlignBothEndsUnmapped_mappedToRepeatRegionFile: " << tmpAlignBothEndsUnmapped_mappedToRepeatRegionFile << endl;
+      // cout << "tmpAlignBothEndsUnmapped_lowScore: " << tmpAlignBothEndsUnmapped_lowScore << endl;
+      // cout << "OutputSamFile_oneEndMapped_bothEndsUnmapped_lowScore: " << OutputSamFile_oneEndMapped_bothEndsUnmapped_lowScore << endl;
+      // cout << "OutputSamFile_fixHeadTail_pair_lowScore: " << OutputSamFile_fixHeadTail_pair_lowScore << endl;
+      // cout << "tmpAlignBothEndsUnmapped: " << tmpAlignBothEndsUnmapped << endl;
+      // cout << "finalOutputSam: " << finalOutputSam << endl;
+			cat_cmd = "cat " + tmpHeadSectionInfo + " " 
+        + tmpAlignCompleteRead + " " 
+        + OutputSamFile_oneEndMapped + " " 
+        + OutputSamFile_fixHeadTail_complete_pair + " " 
+        + OutputSamFile_fixHeadTail_incomplete_pair + " " 
+        + OutputSamFile_fixHeadTail_complete_unpair + " " 
+        + OutputSamFile_fixHeadTail_incomplete_unpair + " " 
+        + OutputSamFile_oneEndMapped_unpair + " " 
+        + tmpAlignBothEndsUnmapped_mappedToRepeatRegionFile + " " 
+        + tmpAlignBothEndsUnmapped_lowScore + " " 
+        + OutputSamFile_oneEndMapped_bothEndsUnmapped_lowScore + " " 
+        + OutputSamFile_fixHeadTail_pair_lowScore + " " 
+        + tmpAlignBothEndsUnmapped + " > " + finalOutputSam;
 		}
 		else
 		{
-      cout << "tmpHeadSectionInfo: " << tmpHeadSectionInfo << endl;
-      cout << "tmpAlignCompleteRead_SE: " << tmpAlignCompleteRead_SE << endl;
-      cout << "OutputSamFile_fixHeadTail_complete_SE: " << OutputSamFile_fixHeadTail_complete_SE << endl;
-      cout << "OutputSamFile_fixHeadTail_incomplete_SE: " << OutputSamFile_fixHeadTail_incomplete_SE << endl;
-      cout << "tmpAlignUnmapped_mappedToRepeatRegionFile_SE: " << tmpAlignUnmapped_mappedToRepeatRegionFile_SE << endl;
-      cout << "tmpAlignUnmapped_lowScore_SE: " << tmpAlignUnmapped_lowScore_SE << endl;
-      cout << "OutputSamFile_fixHeadTail_lowScore_SE: " << OutputSamFile_fixHeadTail_lowScore_SE << endl;
-      cout << "tmpAlignUnmapped_SE: " << tmpAlignUnmapped_SE << endl;
-      cout << "finalOutputSam: " << finalOutputSam << endl;
-			cat_cmd = "cat " + tmpHeadSectionInfo + " " + tmpAlignCompleteRead_SE + " " + OutputSamFile_fixHeadTail_complete_SE
-				+ " " + OutputSamFile_fixHeadTail_incomplete_SE + " " + tmpAlignUnmapped_mappedToRepeatRegionFile_SE + " " + tmpAlignUnmapped_lowScore_SE
-				+ " " + OutputSamFile_fixHeadTail_lowScore_SE + " " + tmpAlignUnmapped_SE + " > " + finalOutputSam;
+      // cout << "tmpHeadSectionInfo: " << tmpHeadSectionInfo << endl;
+      // cout << "tmpAlignCompleteRead_SE: " << tmpAlignCompleteRead_SE << endl;
+      // cout << "OutputSamFile_fixHeadTail_complete_SE: " << OutputSamFile_fixHeadTail_complete_SE << endl;
+      // cout << "OutputSamFile_fixHeadTail_incomplete_SE: " << OutputSamFile_fixHeadTail_incomplete_SE << endl;
+      // cout << "tmpAlignUnmapped_mappedToRepeatRegionFile_SE: " << tmpAlignUnmapped_mappedToRepeatRegionFile_SE << endl;
+      // cout << "tmpAlignUnmapped_lowScore_SE: " << tmpAlignUnmapped_lowScore_SE << endl;
+      // cout << "OutputSamFile_fixHeadTail_lowScore_SE: " << OutputSamFile_fixHeadTail_lowScore_SE << endl;
+      // cout << "tmpAlignUnmapped_SE: " << tmpAlignUnmapped_SE << endl;
+      // cout << "finalOutputSam: " << finalOutputSam << endl;
+			cat_cmd = "cat " + tmpHeadSectionInfo + " " 
+        + tmpAlignCompleteRead_SE + " " 
+        + OutputSamFile_fixHeadTail_complete_SE + " " 
+        + OutputSamFile_fixHeadTail_incomplete_SE + " " 
+        + tmpAlignUnmapped_mappedToRepeatRegionFile_SE + " " 
+        + tmpAlignUnmapped_lowScore_SE + " " 
+        + OutputSamFile_fixHeadTail_lowScore_SE + " " 
+        + tmpAlignUnmapped_SE + " > " + finalOutputSam;
 		}
 		cat_err = system(cat_cmd.c_str());
 		if(-1 == cat_err)
 		{
-	   		cout << "error in catting all files to a final output.sam ..." << endl;
-	   		cout << "cat_err: " << cat_err << endl;
-	   		//exit(1);
-		}		
+	   		log_ofs << "error in catting all files to a final output.sam ..." << endl;
+	   		log_ofs << "cat_err: " << cat_err << endl;
+	   		log_ofs << "re-reading all files and printing to a final output.sam" << endl;
+        vector<string> fileVec;
+        if(!SE_or_PE_bool) // PE
+        {
+          fileVec.push_back(tmpHeadSectionInfo);
+          fileVec.push_back(tmpAlignCompleteRead);
+          fileVec.push_back(OutputSamFile_oneEndMapped);
+          fileVec.push_back(OutputSamFile_fixHeadTail_complete_pair);
+          fileVec.push_back(OutputSamFile_fixHeadTail_incomplete_pair);
+          fileVec.push_back(OutputSamFile_fixHeadTail_complete_unpair);
+          fileVec.push_back(OutputSamFile_fixHeadTail_incomplete_unpair);
+          fileVec.push_back(OutputSamFile_oneEndMapped_unpair);
+          fileVec.push_back(tmpAlignBothEndsUnmapped_mappedToRepeatRegionFile);
+          fileVec.push_back(tmpAlignBothEndsUnmapped_lowScore);
+          fileVec.push_back(OutputSamFile_oneEndMapped_bothEndsUnmapped_lowScore);
+          fileVec.push_back(OutputSamFile_fixHeadTail_pair_lowScore);
+          fileVec.push_back(tmpAlignBothEndsUnmapped);
+        }
+        else // SE
+        {
+          fileVec.push_back(tmpHeadSectionInfo);
+          fileVec.push_back(tmpAlignCompleteRead_SE);
+          fileVec.push_back(OutputSamFile_fixHeadTail_complete_SE);
+          fileVec.push_back(OutputSamFile_fixHeadTail_incomplete_SE);
+          fileVec.push_back(tmpAlignUnmapped_mappedToRepeatRegionFile_SE);
+          fileVec.push_back(tmpAlignUnmapped_lowScore_SE);
+          fileVec.push_back(OutputSamFile_fixHeadTail_lowScore_SE);
+          fileVec.push_back(tmpAlignUnmapped_SE);
+        }
+        merge2finalOutput(fileVec, finalOutputSam);
+		    log_ofs << "end of generating the final output.sam" << endl;
+    }
 	}
 
   annotation_ifs.close();
@@ -1504,60 +1552,60 @@ int main(int argc, char**argv)
   delete indexInfo;
 
 	samReport_end = clock();
-  if(cat_err == -1)
-  { 
-  	juncReport_start = clock();
-  	if(reportJunc_bool)
-  	{
-  		string sam2junc_folder = outputDirStr + "/sam2junc";
-  		//string mkdir_sam2junc_cmd = "mkdir -p " + sam2junc_folder;
-  		//system(mkdir_sam2junc_cmd.c_str());
-  		string reportJunc_file = outputDirStr + "/output.junc";
-  		string reportJunc_cmd = "reportJunc_embeded " + indexStr + " " + int_to_str(threads_num) + " "
-  			+ sam2junc_folder + " " + finalOutputSam + " " + reportJunc_file;
-  		const int reportJunc_err = system(reportJunc_cmd.c_str());
-      if(-1 == reportJunc_err)
-      {
-        cout << "error in report junc ..." << endl;
-        cout << "reportJunc_err: " << reportJunc_err << endl;
-      }
-  	}
-  	juncReport_end = clock();
-  	//string rm_headerSection = "rm " + outputDirStr + "/headSectionInfo";
-  	//system(rm_headerSection.c_str());
-  	if(removeAllIntermediateFilesBool)
-  	{
-  		string rm_logFolder_cmd = "mkdir -p " + outputDirStr + "/logs";
-  		string rm_phase1output_cmd = "mkdir -p " + outputDirStr + "/phase1_output";
-  		string rm_phase2output_cmd = "mkdir -p " + outputDirStr + "/phase2_output";
-  		string rm_sam2junc_cmd = "mkdir -p " + outputDirStr + "/sam2junc";
-  		string rm_SNPmerLearned_cmd = "mkdir -p " + outputDirStr + "/SNPmer_learned";
-  		const int rm_logFolder_err = system(rm_logFolder_cmd.c_str());
-  		const int rm_phase1output_err = system(rm_phase1output_cmd.c_str());
-  		const int rm_phase2output_err = system(rm_phase2output_cmd.c_str());
-  		const int rm_sam2junc_err = system(rm_sam2junc_cmd.c_str());
-  		const int rm_SNPmerLearned_err = system(rm_SNPmerLearned_cmd.c_str());
-      if((-1 == rm_logFolder_err)||(-1 == rm_phase1output_err)||(-1 == rm_phase2output_err)
-        ||(-1 == rm_sam2junc_err)||(-1 == rm_SNPmerLearned_err))
-        cout << "error in remove all intermediate files" << endl;
-  	}
+  // if(cat_err == -1)
+  // { 
+  // 	juncReport_start = clock();
+  // 	if(reportJunc_bool)
+  // 	{
+  // 		string sam2junc_folder = outputDirStr + "/sam2junc";
+  // 		//string mkdir_sam2junc_cmd = "mkdir -p " + sam2junc_folder;
+  // 		//system(mkdir_sam2junc_cmd.c_str());
+  // 		string reportJunc_file = outputDirStr + "/output.junc";
+  // 		string reportJunc_cmd = "reportJunc_embeded " + indexStr + " " + int_to_str(threads_num) + " "
+  // 			+ sam2junc_folder + " " + finalOutputSam + " " + reportJunc_file;
+  // 		const int reportJunc_err = system(reportJunc_cmd.c_str());
+  //     if(-1 == reportJunc_err)
+  //     {
+  //       cout << "error in report junc ..." << endl;
+  //       cout << "reportJunc_err: " << reportJunc_err << endl;
+  //     }
+  // 	}
+  // 	juncReport_end = clock();
+  // 	//string rm_headerSection = "rm " + outputDirStr + "/headSectionInfo";
+  // 	//system(rm_headerSection.c_str());
+  // 	if(removeAllIntermediateFilesBool)
+  // 	{
+  // 		string rm_logFolder_cmd = "mkdir -p " + outputDirStr + "/logs";
+  // 		string rm_phase1output_cmd = "mkdir -p " + outputDirStr + "/phase1_output";
+  // 		string rm_phase2output_cmd = "mkdir -p " + outputDirStr + "/phase2_output";
+  // 		string rm_sam2junc_cmd = "mkdir -p " + outputDirStr + "/sam2junc";
+  // 		string rm_SNPmerLearned_cmd = "mkdir -p " + outputDirStr + "/SNPmer_learned";
+  // 		const int rm_logFolder_err = system(rm_logFolder_cmd.c_str());
+  // 		const int rm_phase1output_err = system(rm_phase1output_cmd.c_str());
+  // 		const int rm_phase2output_err = system(rm_phase2output_cmd.c_str());
+  // 		const int rm_sam2junc_err = system(rm_sam2junc_cmd.c_str());
+  // 		const int rm_SNPmerLearned_err = system(rm_SNPmerLearned_cmd.c_str());
+  //     if((-1 == rm_logFolder_err)||(-1 == rm_phase1output_err)||(-1 == rm_phase2output_err)
+  //       ||(-1 == rm_sam2junc_err)||(-1 == rm_SNPmerLearned_err))
+  //       cout << "error in remove all intermediate files" << endl;
+  // 	}
 
-    string mv_headerSectionFile_cmd = "mv " + outputDirStr + "/headSectionInfo " + outputDirStr + "/logs/";
-    string mv_stats_cmd = "mv " + outputDirStr + "/stats.txt " + outputDirStr + "/logs/"; 
-    const int mv_headerSectionFile_err = system(mv_headerSectionFile_cmd.c_str());
-    const int mv_stats_err = system(mv_stats_cmd.c_str());
-    if((-1 == mv_headerSectionFile_err)||(-1 == mv_stats_err))
-      cout << "error in mv_headerSectionFile_cmd or mv_stats_cmd" << endl;
+  //   string mv_headerSectionFile_cmd = "mv " + outputDirStr + "/headSectionInfo " + outputDirStr + "/logs/";
+  //   string mv_stats_cmd = "mv " + outputDirStr + "/stats.txt " + outputDirStr + "/logs/"; 
+  //   const int mv_headerSectionFile_err = system(mv_headerSectionFile_cmd.c_str());
+  //   const int mv_stats_err = system(mv_stats_cmd.c_str());
+  //   if((-1 == mv_headerSectionFile_err)||(-1 == mv_stats_err))
+  //     cout << "error in mv_headerSectionFile_cmd or mv_stats_cmd" << endl;
 
-    string mv_rawSam_cmd = "mv " + outputDirStr + "/output.sam " + outputDirStr + "/sam2junc/output.raw.sam";
-    string removeFalseJuncSam_cmd = "removeFalseJuncSam " + indexStr + " " + outputDirStr 
-      + "/sam2junc/output.alignInferJunc_classified_filterOut.txt " + outputDirStr + "/sam2junc/output.raw.sam "
-      + outputDirStr + "/output.sam " + int_to_str(threads_num);
-    const int mv_rawSam_err = system(mv_rawSam_cmd.c_str());
-    const int removeFalseJuncSam_err = system(removeFalseJuncSam_cmd.c_str());
-    if((-1 == mv_rawSam_err)||(-1 == removeFalseJuncSam_err))
-      cout << "error in mv_rawSam_cmd or removeFalseJuncSam_cmd" << endl; 
-  }
+  //   string mv_rawSam_cmd = "mv " + outputDirStr + "/output.sam " + outputDirStr + "/sam2junc/output.raw.sam";
+  //   string removeFalseJuncSam_cmd = "removeFalseJuncSam " + indexStr + " " + outputDirStr 
+  //     + "/sam2junc/output.alignInferJunc_classified_filterOut.txt " + outputDirStr + "/sam2junc/output.raw.sam "
+  //     + outputDirStr + "/output.sam " + int_to_str(threads_num);
+  //   const int mv_rawSam_err = system(mv_rawSam_cmd.c_str());
+  //   const int removeFalseJuncSam_err = system(removeFalseJuncSam_cmd.c_str());
+  //   if((-1 == mv_rawSam_err)||(-1 == removeFalseJuncSam_err))
+  //     cout << "error in mv_rawSam_cmd or removeFalseJuncSam_cmd" << endl; 
+  // }
 	nowtime = time(NULL);
 	local = localtime(&nowtime);
 	tmpTimeStr = asctime(local);

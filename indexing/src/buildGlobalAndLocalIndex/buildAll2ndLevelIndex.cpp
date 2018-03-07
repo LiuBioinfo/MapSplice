@@ -35,7 +35,9 @@ int main(int argc, char** argv)
 	log_ofs << "inputIndexPrefix: " << inputIndexPrefix << endl;
 	Output2ndLevelIndexPrefix += "/";
 	cout << "Output2ndLevelIndexPrefix: " << Output2ndLevelIndexPrefix << endl; 
-	log_ofs << "Output2ndLevelIndexPrefix: " << Output2ndLevelIndexPrefix << endl; 
+	log_ofs << "Output2ndLevelIndexPrefix: " << Output2ndLevelIndexPrefix << endl;
+
+	//string invalid2ndLevelIndex 
 	//cout << "mkdir " << endl;
 	//string mkdir_cmd_outputIndex = "mkdir -p " + Output2ndLevelIndexPrefix;
 	//system(mkdir_cmd_outputIndex.c_str());

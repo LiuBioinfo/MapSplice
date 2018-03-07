@@ -536,6 +536,26 @@ public:
 				{
 					cout << "... no ACGT ..." << endl;
 					log_ofs << "... no ACGT ..." << endl;
+					tmp2ndLevelIndexPrefixChrPart_SA_ofs.close();
+					tmp2ndLevelIndexPrefixChrPart_lcp_ofs.close();
+					tmp2ndLevelIndexPrefixChrPart_up_ofs.close();
+					tmp2ndLevelIndexPrefixChrPart_down_ofs.close();
+					tmp2ndLevelIndexPrefixChrPart_next_ofs.close();				
+					tmp2ndLevelIndexPrefixChrPart_chrom_ifs.close();
+					free(chrom);
+					continue;
+				}
+				else if(MAX < 3000001)
+				{
+					cout << "... too short segment ..." << endl;
+					log_ofs << "... too short segment ..." << endl;
+					tmp2ndLevelIndexPrefixChrPart_SA_ofs.close();
+					tmp2ndLevelIndexPrefixChrPart_lcp_ofs.close();
+					tmp2ndLevelIndexPrefixChrPart_up_ofs.close();
+					tmp2ndLevelIndexPrefixChrPart_down_ofs.close();
+					tmp2ndLevelIndexPrefixChrPart_next_ofs.close();				
+					tmp2ndLevelIndexPrefixChrPart_chrom_ifs.close();
+					free(chrom);
 					continue;
 				}
 				else
@@ -688,7 +708,31 @@ public:
 				if(tmpChromString.find_first_of("ATGC") == string::npos)
 				{
 					cout << "... no ACGT ..." << endl;
+					lcp_file_ifs.close();
+					up_file_ifs.close();
+					down_file_ifs.close();
+					next_file_ifs.close();
+					lcpCompress_file_ofs.close();
+					childTab_file_ofs.close();
+					detChild_file_ofs.close();
+					tmp2ndLevelIndexPrefixChrPart_chrom_ifs.close();
+					free(chrom);
 					continue;
+				}
+				else if(indexSize < 3000001)
+				{
+					cout << "... too short segment ..." << endl;
+					//log_ofs << "... too short segment ..." << endl;
+					lcp_file_ifs.close();
+					up_file_ifs.close();
+					down_file_ifs.close();
+					next_file_ifs.close();
+					lcpCompress_file_ofs.close();
+					childTab_file_ofs.close();
+					detChild_file_ofs.close();
+					tmp2ndLevelIndexPrefixChrPart_chrom_ifs.close();
+					free(chrom);
+					continue;	
 				}
 				else
 				{
@@ -756,6 +800,7 @@ public:
 				lcpCompress_file_ofs.close();
 				childTab_file_ofs.close();
 				detChild_file_ofs.close();
+				tmp2ndLevelIndexPrefixChrPart_chrom_ifs.close();
 			
 				free(chrom);
 				free(lcpCompress);

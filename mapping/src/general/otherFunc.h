@@ -8,6 +8,26 @@
 
 using namespace std;
 
+void merge2finalOutput(vector<string>& fileVec, string& outputFile)
+{
+	ofstream final_ofs(outputFile.c_str());
+	for(int tmp = 0; tmp < fileVec.size(); tmp++)
+	{
+		string tmpFile = fileVec[tmp];
+		ifstream tmp_ifs(tmpFile.c_str());
+		while(!tmp_ifs.eof())
+		{
+			string tmpStr;
+			getline(tmp_ifs, tmpStr);
+			if(tmpStr == "")
+				break;
+			final_ofs << tmpStr << endl;
+		}
+		tmp_ifs.close();
+	}
+	final_ofs.close();
+}
+
 int selectTheSmallestAmong4values(
 	int v1, int v2, int v3, int v4)
 {
