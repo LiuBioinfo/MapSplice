@@ -17,6 +17,8 @@ inputChrNameLineNumList:
 1
 3
 6
+
+Note: do not forget the last line
 */
 
 

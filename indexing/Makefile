@@ -16,6 +16,8 @@ buildWholeGenome_mergedFa:
 	g++  $(CFLAGS) -o $(OUTPUTDIR)buildWholeGenome_mergedFa src/buildGlobalAndLocalIndex/buildWholeGenomeIndex_mergedFa.cpp
 buildWholeGenome_mergedFa_noPreIndex:
 	g++  $(CFLAGS) -o $(OUTPUTDIR)buildWholeGenome_mergedFa_noPreIndex src/buildGlobalAndLocalIndex/buildWholeGenomeIndex_mergedFa_noPreIndex.cpp	
+buildWholeGenome_mergedFa_noPreIndex_varyLineNumPerFa:
+	g++  $(CFLAGS) -o $(OUTPUTDIR)buildWholeGenome_mergedFa_noPreIndex_varyLineNumPerFa src/buildGlobalAndLocalIndex/buildWholeGenomeIndex_mergedFa_noPreIndex_varyLineNumPerFa.cpp
 build2ndLevelIndex:
 	g++  $(CFLAGS) -o $(OUTPUTDIR)build2ndLevelIndex src/buildGlobalAndLocalIndex/buildAll2ndLevelIndex.cpp
 extractTranscriptSeq:
