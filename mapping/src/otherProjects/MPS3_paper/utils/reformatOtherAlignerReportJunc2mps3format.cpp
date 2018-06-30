@@ -119,7 +119,7 @@ int main(int argc, char** argv)
 		{
 			chrName = tabVec[0];
 			startPos = atoi(tabVec[1].c_str());
-			endPos = atoi(tabVec[1].c_str());
+			endPos = atoi(tabVec[2].c_str());
 			supNum = atoi(tabVec[4].c_str());
 		}
 		else
