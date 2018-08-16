@@ -15,6 +15,9 @@
 time_t nowtime;
 struct tm *local;
 
+#define BackSplice_SupNum_Min 2
+#define BackSplice_Overhang_Min 30
+
 #include "../../general/read_block_test.h"
 #include "../../general/index_info.h"
 #include "../../general/alignInferJunctionHash_info.h"
@@ -372,6 +375,10 @@ int main(int argc, char**argv)
 		int tmpSJ_anchorSize_doner = alignInferJunctionHashInfo_merged->returnAnchorSizeMax_doner(tmp);
 		int tmpSJ_anchorSize_acceptor = alignInferJunctionHashInfo_merged->returnAnchorSizeMax_acceptor(tmp);
 		int tmpSJ_supportNum = alignInferJunctionHashInfo_merged->returnAlignInferInfo_supportNum(tmp);
+		if((tmpSJ_donerEndPos > tmpSJ_acceptorStartPos)&&((tmpSJ_supportNum < BackSplice_SupNum_Min)
+			||(tmpSJ_anchorSize_doner < BackSplice_Overhang_Min)||(tmpSJ_anchorSize_acceptor < BackSplice_Overhang_Min)))
+	    // filtering back splice junctions based on overhang and sup#	
+    		continue;
 		int tmpSJ_XMmin = alignInferJunctionHashInfo_merged->returnAlignInferInfo_XMmin(tmp);
 		int tmpSJ_XMmax = alignInferJunctionHashInfo_merged->returnAlignInferInfo_XMmax(tmp);
 		string tmpSJ_flankString = alignInferJunctionHashInfo_merged->returnAlignInferInfo_flankString(tmp, indexInfo);
