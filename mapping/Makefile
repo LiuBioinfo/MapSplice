@@ -1,15 +1,123 @@
 all: alignAll annotation
 
 OPTFLAGS = -O0 -g -rdynamic -std=c++0x
-OUTPUTDIR = ./
+OUTPUTDIR = ./bin/
 
 CFLAGS += $(OPTFLAGS) -fopenmp
 
-mps:
-	g++ $(CFLAGS) -o $(OUTPUTDIR)mps src/mps_arrayList.cpp
+mps: sam2alignInferJuncHash_supportNum_anchorSize_XM_parallel_classify \
+	detection_globalMap generateFusionJuncInfoFromAdjustedBreakPointFile separateFusionJuncStrandedOrNot \
+	filterFusionJunc_anchorSeqSimilarity filterNonStrandedFusionJunc_anchorSeqSimilarity \
+	compareFusionJuncResultsWithGTFannotation filtering_supNum_repeat
+	g++ $(CFLAGS) -o $(OUTPUTDIR)mps_regular src/mps_arrayList.cpp
+	g++ $(CFLAGS) -D DETECT_CIRCULAR_RNA -o $(OUTPUTDIR)mps_regular_circRNA src/mps_arrayList.cpp	
+	g++ $(CFLAGS) -D MPS_FUSION_POST_NEW -o $(OUTPUTDIR)mps_regular_fusion src/mps_arrayList.cpp
+	g++ $(CFLAGS) -D DETECT_CIRCULAR_RNA -D MPS_FUSION_POST_NEW -o $(OUTPUTDIR)mps_regular_circRNA_fusion src/mps_arrayList.cpp
+	g++ $(CFLAGS) -o $(OUTPUTDIR)mps3_fusion_post_new src/otherProjects/fusion_post_new/fusion_post_main.cpp
 	g++ $(CFLAGS) -o $(OUTPUTDIR)buildSNPmerIndex_embeded_mps_nonBatch src/otherProjects/indexing/utils/build_snpMerIndex.cpp
 	g++ $(CFLAGS) -o $(OUTPUTDIR)reportJunc_embeded src/otherProjects/utilities/reportJunc_embeded.cpp
 	g++ $(CFLAGS) -o $(OUTPUTDIR)removeFalseJuncSam src/otherProjects/utilities/removeFalseJuncSam.cpp
+
+rm_mps:
+	rm -f $(OUTPUTDIR)mps_regular
+	rm -f $(OUTPUTDIR)mps_regular_circRNA
+	rm -f $(OUTPUTDIR)mps_regular_fusion
+	rm -f $(OUTPUTDIR)mps_regular_circRNA_fusion
+	rm -f $(OUTPUTDIR)buildSNPmerIndex_embeded_mps_nonBatch
+	rm -f $(OUTPUTDIR)reportJunc_embeded
+	rm -f $(OUTPUTDIR)removeFalseJuncSam
+	rm -f $(OUTPUTDIR)mps3_fusion_post_new
+	rm -f $(OUTPUTDIR)sam2alignInferJuncHash_supportNum_anchorSize_XM_parallel_classify
+	rm -f $(OUTPUTDIR)detection_globalMap
+	rm -f $(OUTPUTDIR)generateFusionJuncInfoFromAdjustedBreakPointFile
+	rm -f $(OUTPUTDIR)separateFusionJuncStrandedOrNot
+	rm -f $(OUTPUTDIR)filterFusionJunc_anchorSeqSimilarity
+	rm -f $(OUTPUTDIR)filterNonStrandedFusionJunc_anchorSeqSimilarity
+	rm -f $(OUTPUTDIR)compareFusionJuncResultsWithGTFannotation 
+	rm -f $(OUTPUTDIR)filtering_supNum_repeat
+
+mps_regular:
+	g++ $(CFLAGS) -o $(OUTPUTDIR)mps_regular src/mps_arrayList.cpp
+	g++ $(CFLAGS) -o $(OUTPUTDIR)buildSNPmerIndex_embeded_mps_nonBatch src/otherProjects/indexing/utils/build_snpMerIndex.cpp
+	g++ $(CFLAGS) -o $(OUTPUTDIR)reportJunc_embeded src/otherProjects/utilities/reportJunc_embeded.cpp
+	g++ $(CFLAGS) -o $(OUTPUTDIR)removeFalseJuncSam src/otherProjects/utilities/removeFalseJuncSam.cpp
+
+mps_regular_circRNA:
+	g++ $(CFLAGS) -D DETECT_CIRCULAR_RNA -o $(OUTPUTDIR)mps_regular_circRNA src/mps_arrayList.cpp
+	g++ $(CFLAGS) -o $(OUTPUTDIR)buildSNPmerIndex_embeded_mps_nonBatch src/otherProjects/indexing/utils/build_snpMerIndex.cpp
+	g++ $(CFLAGS) -o $(OUTPUTDIR)reportJunc_embeded src/otherProjects/utilities/reportJunc_embeded.cpp
+	g++ $(CFLAGS) -o $(OUTPUTDIR)removeFalseJuncSam src/otherProjects/utilities/removeFalseJuncSam.cpp
+
+mps_regular_fusion: sam2alignInferJuncHash_supportNum_anchorSize_XM_parallel_classify \
+	detection_globalMap generateFusionJuncInfoFromAdjustedBreakPointFile separateFusionJuncStrandedOrNot \
+	filterFusionJunc_anchorSeqSimilarity filterNonStrandedFusionJunc_anchorSeqSimilarity \
+	compareFusionJuncResultsWithGTFannotation filtering_supNum_repeat
+	g++ $(CFLAGS) -o $(OUTPUTDIR)mps_regular_fusion src/mps_arrayList.cpp
+	g++ $(CFLAGS) -o $(OUTPUTDIR)buildSNPmerIndex_embeded_mps_nonBatch src/otherProjects/indexing/utils/build_snpMerIndex.cpp
+	g++ $(CFLAGS) -o $(OUTPUTDIR)reportJunc_embeded src/otherProjects/utilities/reportJunc_embeded.cpp
+	g++ $(CFLAGS) -o $(OUTPUTDIR)removeFalseJuncSam src/otherProjects/utilities/removeFalseJuncSam.cpp
+	g++ $(CFLAGS) -o $(OUTPUTDIR)mps3_fusion_post_new src/otherProjects/fusion_post_new/fusion_post_main.cpp
+
+mps_regular_circRNA_fusion: sam2alignInferJuncHash_supportNum_anchorSize_XM_parallel_classify \
+	detection_globalMap generateFusionJuncInfoFromAdjustedBreakPointFile separateFusionJuncStrandedOrNot \
+	filterFusionJunc_anchorSeqSimilarity filterNonStrandedFusionJunc_anchorSeqSimilarity \
+	compareFusionJuncResultsWithGTFannotation filtering_supNum_repeat
+	g++ $(CFLAGS) -D DETECT_CIRCULAR_RNA -o $(OUTPUTDIR)mps_regular_circRNA_fusion src/mps_arrayList.cpp
+	g++ $(CFLAGS) -o $(OUTPUTDIR)buildSNPmerIndex_embeded_mps_nonBatch src/otherProjects/indexing/utils/build_snpMerIndex.cpp
+	g++ $(CFLAGS) -o $(OUTPUTDIR)reportJunc_embeded src/otherProjects/utilities/reportJunc_embeded.cpp
+	g++ $(CFLAGS) -o $(OUTPUTDIR)removeFalseJuncSam src/otherProjects/utilities/removeFalseJuncSam.cpp
+
+rm_mps_regular:
+	rm -f $(OUTPUTDIR)mps_regular
+	rm -f $(OUTPUTDIR)buildSNPmerIndex_embeded_mps_nonBatch
+	rm -f $(OUTPUTDIR)reportJunc_embeded
+	rm -f $(OUTPUTDIR)removeFalseJuncSam
+
+rm_mps_regular_circRNA:
+	rm -f $(OUTPUTDIR)mps_regular_circRNA
+	rm -f $(OUTPUTDIR)buildSNPmerIndex_embeded_mps_nonBatch
+	rm -f $(OUTPUTDIR)reportJunc_embeded
+	rm -f $(OUTPUTDIR)removeFalseJuncSam
+
+rm_mps_regular_fusion:
+	rm -f $(OUTPUTDIR)mps_regular_fusion
+	rm -f $(OUTPUTDIR)buildSNPmerIndex_embeded_mps_nonBatch
+	rm -f $(OUTPUTDIR)reportJunc_embeded
+	rm -f $(OUTPUTDIR)removeFalseJuncSam
+	rm -f $(OUTPUTDIR)mps3_fusion_post_new
+	rm -f $(OUTPUTDIR)sam2alignInferJuncHash_supportNum_anchorSize_XM_parallel_classify
+	rm -f $(OUTPUTDIR)detection_globalMap
+	rm -f $(OUTPUTDIR)generateFusionJuncInfoFromAdjustedBreakPointFile
+	rm -f $(OUTPUTDIR)separateFusionJuncStrandedOrNot
+	rm -f $(OUTPUTDIR)filterFusionJunc_anchorSeqSimilarity
+	rm -f $(OUTPUTDIR)filterNonStrandedFusionJunc_anchorSeqSimilarity
+	rm -f $(OUTPUTDIR)compareFusionJuncResultsWithGTFannotation 
+	rm -f $(OUTPUTDIR)filtering_supNum_repeat
+
+rm_mps_regular_circRNA_fusion:
+	rm -f $(OUTPUTDIR)mps_regular_circRNA_fusion
+	rm -f $(OUTPUTDIR)buildSNPmerIndex_embeded_mps_nonBatch
+	rm -f $(OUTPUTDIR)reportJunc_embeded
+	rm -f $(OUTPUTDIR)removeFalseJuncSam
+	rm -f $(OUTPUTDIR)mps3_fusion_post_new
+	rm -f $(OUTPUTDIR)sam2alignInferJuncHash_supportNum_anchorSize_XM_parallel_classify
+	rm -f $(OUTPUTDIR)detection_globalMap
+	rm -f $(OUTPUTDIR)generateFusionJuncInfoFromAdjustedBreakPointFile
+	rm -f $(OUTPUTDIR)separateFusionJuncStrandedOrNot
+	rm -f $(OUTPUTDIR)filterFusionJunc_anchorSeqSimilarity
+	rm -f $(OUTPUTDIR)filterNonStrandedFusionJunc_anchorSeqSimilarity
+	rm -f $(OUTPUTDIR)compareFusionJuncResultsWithGTFannotation 
+	rm -f $(OUTPUTDIR)filtering_supNum_repeat
+
+##############################################################################################################################
+##############################################################################################################################
+##############################################################################################################################
+
+#mps:
+#	g++ $(CFLAGS) -o $(OUTPUTDIR)mps src/mps_arrayList.cpp
+#	g++ $(CFLAGS) -o $(OUTPUTDIR)buildSNPmerIndex_embeded_mps_nonBatch src/otherProjects/indexing/utils/build_snpMerIndex.cpp
+#	g++ $(CFLAGS) -o $(OUTPUTDIR)reportJunc_embeded src/otherProjects/utilities/reportJunc_embeded.cpp
+#	g++ $(CFLAGS) -o $(OUTPUTDIR)removeFalseJuncSam src/otherProjects/utilities/removeFalseJuncSam.cpp
 
 mps_circRNA:
 	g++ $(CFLAGS) -D DETECT_CIRCULAR_RNA -o $(OUTPUTDIR)mps_circRNA src/mps_arrayList.cpp
@@ -47,7 +155,7 @@ reportJunc_embeded:
 	g++ $(CFLAGS) -o $(OUTPUTDIR)reportJunc_embeded src/otherProjects/utilities/reportJunc_embeded.cpp
 
 removeFalseJuncSam:
-	g++ $(CFLAGS) -o $(OUTPUTDIR)removeFalseJuncSam src/otherProjects/utilities/removeFalseJuncSam.cpp	
+	g++ $(CFLAGS) -o $(OUTPUTDIR)removeFalseJuncSam src/otherProjects/utilities/removeFalseJuncSam.cpp
 
 #mps_fusion_post
 
@@ -80,6 +188,9 @@ filtering_supNum_repeat:
 
 convertMPS3fusionResults2bedpe:
 	g++ $(CFLAGS) -o $(OUTPUTDIR)convertMPS3fusionResults2bedpe src/otherProjects/fusion_post_new/utils/convertMPS3fusionResults2bedpe.cpp
+
+cmpFusionRes2gt:
+	g++ $(CFLAGS) -o $(OUTPUTDIR)cmpFusionRes2gt src/otherProjects/MPS3_fusion/fusionReviewNAR/cmpFusionRes2gt.cpp
 
 # seqQueryTree
 #parseSeqOthelloResults_uniformSampleTranscript:

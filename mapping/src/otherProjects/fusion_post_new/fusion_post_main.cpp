@@ -83,7 +83,7 @@ int main(int argc, char** argv)
 
 	string sam2juncForFusionFilter_folderPath = outputFolderStr + "sam2juncForFusionFilter";
 	string oriOutputSam = inputOriMPS3resultsFolder + "/phase1_output/completePair/completePair.sam";
-	string sam2junc_forFusionFilter_cmd = "sam2alignInferJuncHash_supportNum_anchorSize_XM_parallel_classify " 
+	string sam2junc_forFusionFilter_cmd = "./sam2alignInferJuncHash_supportNum_anchorSize_XM_parallel_classify " 
 		+ inputIndexFolderPath + " " + threadsNumStr + " " + sam2juncForFusionFilter_folderPath + " " + oriOutputSam;
 	cout << "sam2junc cmd: " << sam2junc_forFusionFilter_cmd << endl << endl;
 	log_ofs << "sam2junc cmd: " << sam2junc_forFusionFilter_cmd << endl << endl;
@@ -107,7 +107,7 @@ int main(int argc, char** argv)
 
 	string inputIncompletePairSamFile = inputOriMPS3resultsFolder + "/phase2_output/fixHeadTail_incomplete_pair.sam";
 	string globalDetection_folderPath = outputFolderStr + "globalDetection";
-	string globalDetection_cmd = "detection_globalMap " + inputIndexFolderPath + " " + inputFormattedGtf 
+	string globalDetection_cmd = "./detection_globalMap " + inputIndexFolderPath + " " + inputFormattedGtf 
 		+ " " + threadsNumStr + " " + inputIncompletePairSamFile + " " + globalDetection_folderPath;
 	cout << "globalDetection cmd: " << globalDetection_cmd << endl << endl;
 	log_ofs << "globalDetection cmd: " << globalDetection_cmd << endl << endl;
@@ -131,7 +131,7 @@ int main(int argc, char** argv)
 
 	string inputAdjustedFusionBreakPointFilePath = outputFolderStr + "globalDetection/fusion.breakPoint";
 	string fusionJunc_file = inputAdjustedFusionBreakPointFilePath + ".junc.raw";
-	string generateFusionJuncFromBreakPointFile_cmd = "generateFusionJuncInfoFromAdjustedBreakPointFile "
+	string generateFusionJuncFromBreakPointFile_cmd = "./generateFusionJuncInfoFromAdjustedBreakPointFile "
 		+ inputIndexFolderPath + " " + inputAdjustedFusionBreakPointFilePath + " " + fusionJunc_file;
 	cout << "generateFusionJuncFromBreakPointFile cmd: " << generateFusionJuncFromBreakPointFile_cmd << endl << endl;
 	log_ofs << "generateFusionJuncFromBreakPointFile cmd: " << generateFusionJuncFromBreakPointFile_cmd << endl << endl;
@@ -158,7 +158,7 @@ int main(int argc, char** argv)
 	system(mkdir_fusionJunc_folder.c_str());
 
 	string fusionJunc_separate_prefix = fusionJunc_folder + "/raw";
-	string separateFusionJunc_strandedOrNot_cmd = "separateFusionJuncStrandedOrNot " + fusionJunc_file 
+	string separateFusionJunc_strandedOrNot_cmd = "./separateFusionJuncStrandedOrNot " + fusionJunc_file 
 		+ " " + fusionJunc_separate_prefix;
 	cout << "separateFusionJunc_strandedOrNot cmd: " << separateFusionJunc_strandedOrNot_cmd << endl << endl;
 	log_ofs << "separateFusionJunc_strandedOrNot cmd: " << separateFusionJunc_strandedOrNot_cmd << endl << endl;
@@ -183,7 +183,7 @@ int main(int argc, char** argv)
 	string sam2juncForFusionFilter_file = sam2juncForFusionFilter_folderPath + "/output.alignInferJunc.txt";
 	string fusionJunc_stranded = fusionJunc_separate_prefix + ".stranded";
 	string fusionJunc_stranded_filter_folder = fusionJunc_stranded + ".filter";
-	string filterFusionJunc_stranded_cmd = "filterFusionJunc_anchorSeqSimilarity " + inputIndexFolderPath + " "
+	string filterFusionJunc_stranded_cmd = "./filterFusionJunc_anchorSeqSimilarity " + inputIndexFolderPath + " "
 		+ fusionJunc_stranded + " " + fusionJunc_stranded_filter_folder + " " + sam2juncForFusionFilter_file;
 	cout << "filterFusionJunc_stranded cmd: " << filterFusionJunc_stranded_cmd << endl << endl;
 	log_ofs << "filterFusionJunc_stranded cmd: " << filterFusionJunc_stranded_cmd << endl << endl;
@@ -207,7 +207,7 @@ int main(int argc, char** argv)
 
 	string fusionJunc_nonStranded = fusionJunc_separate_prefix + ".nonStranded";
 	string fusionJunc_nonStranded_filter_folder = fusionJunc_nonStranded + ".filter";
-	string filterFusionJunc_nonStranded_cmd = "filterNonStrandedFusionJunc_anchorSeqSimilarity " 
+	string filterFusionJunc_nonStranded_cmd = "./filterNonStrandedFusionJunc_anchorSeqSimilarity " 
 		+ inputIndexFolderPath + " " + fusionJunc_nonStranded + " " + fusionJunc_nonStranded_filter_folder
 		+ " " + sam2juncForFusionFilter_file;
 	cout << "filterFusionJunc_nonStranded cmd: " << filterFusionJunc_nonStranded_cmd << endl << endl;
@@ -256,7 +256,7 @@ int main(int argc, char** argv)
 	log_ofs << endl << tmpTimeStr << "start to do STEP 8:  CMP PASSED JUNC 2 GTF ......" << endl;
 
 	string passedJunc_cmp2gtf_folder = outputFolderStr + "/fusionJunc_pass_cmp2ann";
-	string passedJunc_cmp2gtf_cmd = "compareFusionJuncResultsWithGTFannotation " + inputIndexFolderPath
+	string passedJunc_cmp2gtf_cmd = "./compareFusionJuncResultsWithGTFannotation " + inputIndexFolderPath
 		+ " " + inputFormattedGtf + " " + passed_fusionJunc_bothStrandedOrNot + " " + passedJunc_cmp2gtf_folder + " " + offsetWhenComparingWithGTF 
 		+ " " + checkStrandedOrNotWhenComparingWithGTF;
 	cout << "passedJunc_cmp2gtf cmd: " << passedJunc_cmp2gtf_cmd << endl << endl;
@@ -279,7 +279,7 @@ int main(int argc, char** argv)
 	cout << endl << tmpTimeStr << "start to do STEP 9:  FILTERING_SUPNUM_REPEAT......" << endl;
 	log_ofs << endl << tmpTimeStr << "start to do STEP 9:  FILTERING_SUPNUM_REPEAT ......" << endl;
 
-	string filtering_supNum_repeat_cmd = "filtering_supNum_repeat " + supNumMinStr + " " + inputReformattedParalogGeneGroupFile + " "
+	string filtering_supNum_repeat_cmd = "./filtering_supNum_repeat " + supNumMinStr + " " + inputReformattedParalogGeneGroupFile + " "
 		+ passedJunc_cmp2gtf_folder + "/fusionJunc_geneInfo_interGene.txt " + passedJunc_cmp2gtf_folder + "/fusionJunc_geneInfo_interGene";
 	cout << "filtering_supNum_repeat cmd: " << filtering_supNum_repeat_cmd << endl << endl;
 	log_ofs << "filtering_supNum_repeat cmd: " << filtering_supNum_repeat_cmd << endl << endl;
@@ -292,8 +292,39 @@ int main(int argc, char** argv)
 	cout << endl << tmpTimeStr << "end of STEP 9:  FILTERING_SUPNUM_REPEAT ......" << endl;
 	log_ofs << endl << tmpTimeStr << "end of STEP 9:  FILTERING_SUPNUM_REPEAT ......" << endl;
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
-	//////////////////////////      STEP 9:  FILTERING_SUPNUM_REPEAT       ////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////////////////////////////////	
+	//////////////////////////      STEP 10: PREPARE FINAL RESULTS       //////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////
+    nowtime = time(NULL);
+    local = localtime(&nowtime);
+    tmpTimeStr = asctime(local);
+    tmpTimeStr = "[" + tmpTimeStr.substr(0, tmpTimeStr.length()-1) + "] ";
+    cout << endl << tmpTimeStr << "start to do STEP 10:  PREPARE FINAL RESULTS......" << endl;
+    log_ofs << endl << tmpTimeStr << "start to do STEP 10:  PREPARE FINAL RESULTS ......" << endl;
+    
+	string ori_results_inter_gene_fusion_genePair_list = passedJunc_cmp2gtf_folder 
+		+ "/fusionJunc_geneInfo_interGene.kept.genePair";     
+    string final_results_fusion_genePair_list = outputFolderStr + "fusion.genePair.final.txt";
+    string prepare_final_results_cmd_genePair = "cp " + ori_results_inter_gene_fusion_genePair_list 
+		+ " " + final_results_fusion_genePair_list;
+    cout << "prepare_final_results_genePair cmd: " << prepare_final_results_cmd_genePair << endl << endl;
+    log_ofs << "prepare_final_results_genePair cmd: " << prepare_final_results_cmd_genePair << endl << endl;
+    system(prepare_final_results_cmd_genePair.c_str());
+    
+	string ori_results_inter_gene_fusion_pos_list = passedJunc_cmp2gtf_folder 
+		+ "/fusionJunc_geneInfo_interGene.kept";     
+    string final_results_fusion_pos_list = outputFolderStr + "fusion.pos.final.txt";
+    string prepare_final_results_cmd_pos = "cp " + ori_results_inter_gene_fusion_pos_list 
+		+ " " + final_results_fusion_pos_list;
+    cout << "prepare_final_results_pos cmd: " << prepare_final_results_cmd_pos << endl << endl;
+    log_ofs << "prepare_final_results_pos cmd: " << prepare_final_results_cmd_pos << endl << endl;
+    system(prepare_final_results_cmd_pos.c_str());	
+	///////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////         ALL JOBS DONE!       ////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    nowtime = time(NULL);
+    local = localtime(&nowtime);
+    tmpTimeStr = asctime(local);
+    tmpTimeStr = "[" + tmpTimeStr.substr(0, tmpTimeStr.length()-1) + "] ";
 	cout << endl << tmpTimeStr << "all jobs done ......" << endl;
 	log_ofs << endl << tmpTimeStr << "all jobs done ......" << endl;	
 	log_ofs.close();

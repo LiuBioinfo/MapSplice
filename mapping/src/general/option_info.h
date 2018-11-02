@@ -82,9 +82,18 @@ public:
 	bool report_sam_only_bool;
 
 	bool keep_tmp_bool;
+	
+	int fusion_post_sup_min;
+	
+	string fusion_post_formatted_gtf_path;
+	bool fusion_post_formatted_gtf_provided_bool;
+	
+	string fusion_post_paralog_gene_path;
+	bool fusion_post_paralog_gene_provided_bool;
+	
 	Option_Info()
 	{
-		optionStr = "W:1:2:S:G:L:T:F:O:M:I:Z:P:Q:R:U:Y:D:C:7ABEXNJKH3456";
+		optionStr = "W:1:2:S:G:L:T:F:O:M:I:Z:P:Q:R:U:Y:D:C:7:8:9:ABEXNJKH3456";
 		SE_or_PE_bool = false;
 		Do_phase1_only_bool = false;
 		annotation_provided_bool = false;
@@ -108,12 +117,39 @@ public:
 		updateChrSeqWithSNPonly_avoidSegMap2SNPmer_bool = false;
 
 		backSplice_search_bool = false;
+		#ifdef DETECT_CIRCULAR_RNA
+		backSplice_search_bool = true;
+		#endif
+
 		fusion_search_bool = false;
+		#ifdef MPS_FUSION_POST_NEW
+		fusion_search_bool = true;
+		#endif
 
 		avoid_creating_folder_bool = false;
 		report_sam_only_bool = false;
 
 		keep_tmp_bool = false;
+		
+		fusion_post_sup_min = 5;
+
+		fusion_post_formatted_gtf_provided_bool = false;
+		fusion_post_paralog_gene_provided_bool = false;
+	}
+
+	int return_fusion_post_sup_min()
+	{
+		return fusion_post_sup_min;
+	}
+	
+	string return_fusion_post_formatted_gtf_path()
+	{
+		return fusion_post_formatted_gtf_path;
+	}
+	
+	string return_fusion_post_paralog_gene_path()
+	{
+		return fusion_post_paralog_gene_path;
 	}
 
 	bool return_keep_tmp_bool()
@@ -216,7 +252,7 @@ public:
 	{
 		struct option long_options[] {
 			{"Do_phase1_only", 0, NULL, 'A'},
-			{"Avoid_creating_folder", 0, NULL, '7'},
+			//{"Avoid_creating_folder", 0, NULL, '7'},
 			{"sharedThreadForIO", 0, NULL, 'B'},
 			{"updateChrSeqWithSNPonly_avoidSegMap2SNPmer_bothPhase_or_phase2only", 1, NULL, 'C'},// C
 			{"SNPmerMap", 1, NULL, 'D'},
@@ -248,10 +284,14 @@ public:
 			{"fusion-search", 0, NULL, '4'},
 			{"report-sam-only", 0, NULL, '5'},
 			{"keep-tmp", 0, NULL, '6'},
+			{"fusion-post_sup_min", 1, NULL, '7'},
+			{"fusion-post-gene-ann", 1, NULL, '8'},
+			{"fusion-post-paralog-gene", 1, NULL, '9'},
 			{NULL, 0, NULL, 0},
 		};		
 		char ch;
-		string threadsStr, formatStr, min_mapped_perc_str, optargStr, SNPmerMap_phase_str, updateChrSeqWithSNP_phase_str;
+		string threadsStr, formatStr, min_mapped_perc_str, optargStr, SNPmerMap_phase_str, 
+			updateChrSeqWithSNP_phase_str, fusion_post_sup_min_str;
 
 		bool option_S_set = false;
 		bool option_1_set = false;
@@ -300,9 +340,9 @@ public:
 		    	case 'E':
 		    		readFileIn_listFile_or_commandLine_bool = true;
 		    		break;
-		    	case '7':
-		    		avoid_creating_folder_bool = true;
-		    		break;
+		    	//case '7':
+		    	//	avoid_creating_folder_bool = true;
+		    	//	break;
 		    	case 'C':
 		    		updateChrSeqWithSNPonly_avoidSegMap2SNPmer_bool = true;
 		    		updateChrSeqWithSNP_phase_str = optarg;
@@ -447,7 +487,19 @@ public:
 			    	break;
 			    case '6':
 			    	keep_tmp_bool = true;
-			    	break;			    	
+			    	break;
+			    case '7':
+			    	fusion_post_sup_min_str = optarg;
+					fusion_post_sup_min = atoi(fusion_post_sup_min_str.c_str());
+			    	break;					
+			    case '8':
+					fusion_post_formatted_gtf_path = optarg;
+			    	fusion_post_formatted_gtf_provided_bool = true;
+			    	break;					
+			    case '9':
+					fusion_post_paralog_gene_path = optarg;
+			    	fusion_post_paralog_gene_provided_bool = true;
+			    	break;			
 			    default:
 			        printf("other option:%c\n",ch);
 		    }
@@ -542,6 +594,17 @@ public:
 			cout << "all the above options should be set 0 or 1 !" << endl;
 			exit(1);
 		}
+		
+		#ifdef MPS_FUSION_POST_NEW
+		if((!fusion_post_formatted_gtf_provided_bool)||(!fusion_post_paralog_gene_provided_bool))
+		{
+			cout << "fusion-post-gene-ann and/or fusion-post-paralog-gene not set!" << endl;
+			cout << "Please set options " << endl;
+			cout << "--fusion-post-gene-ann <fusion-post-gene-ann-path> and/or" << endl;
+			cout << "--fusion-post-paralog-gene <fusion-post-paralog-gene-path>" << endl;
+			exit(1);	
+		}
+		#endif
 	}
 
 	bool checkInputFileFormat(const string& read_file_path_1)

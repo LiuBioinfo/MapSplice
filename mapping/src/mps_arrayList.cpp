@@ -1301,7 +1301,7 @@ int main(int argc, char**argv)
 		tmpTimeStr = "[" + tmpTimeStr.substr(0, tmpTimeStr.length()-1) + "] ";
 		cout << endl << tmpTimeStr << "... fixing unfixed-head/tail reads starts ......" << endl ;  
 		log_ofs << endl << tmpTimeStr << "... fixing unfixed-head/tail reads starts ......" << endl ; 
-		runtime_log_ofs << endl << tmpTimeStr << "... fixing unfixed-head/tail reads starts ......" << endl ; 
+		runtime_log_ofs << endl << tmpTimeStr << "... fixing unfixed-head/tail reads starts ......" << endl; 
 
 		string headTailSoftClippingFile;
 		if(SE_or_PE_bool)
@@ -1606,6 +1606,41 @@ int main(int argc, char**argv)
   //   if((-1 == mv_rawSam_err)||(-1 == removeFalseJuncSam_err))
   //     cout << "error in mv_rawSam_cmd or removeFalseJuncSam_cmd" << endl; 
   // }
+
+  #ifdef MPS_FUSION_POST_NEW
+  nowtime = time(NULL);
+  local = localtime(&nowtime);
+  tmpTimeStr = asctime(local);
+  tmpTimeStr = "[" + tmpTimeStr.substr(0, tmpTimeStr.length()-1) + "] ";
+  cout << endl << tmpTimeStr << "... fusion post analysis starts ......" << endl ;  
+  log_ofs << endl << tmpTimeStr << "... fusion post analysis starts ......" << endl ; 
+  runtime_log_ofs << endl << tmpTimeStr << "... fusion post analysis starts ......" << endl;
+  int fusion_post_sup_min = optionInfo->return_fusion_post_sup_min();
+  string fusion_post_sup_min_str = int_to_str(fusion_post_sup_min);
+  string fusion_post_thread_num_str = int_to_str(threads_num);
+  string fusion_post_gtf_path = optionInfo->return_fusion_post_formatted_gtf_path();
+  string fusion_post_paralog_gene_path = optionInfo->return_fusion_post_paralog_gene_path();
+  string fusion_post_output_path = outputDirStr + "/fusion_post/";
+  string fusion_post_cmd = "./mps3_fusion_post_new " + indexStr 
+    + " " + outputDirStr 
+    + "/ " + fusion_post_gtf_path 
+    + " " + fusion_post_thread_num_str 
+    + " " + fusion_post_sup_min_str 
+    + " " + fusion_post_paralog_gene_path 
+    + " " + fusion_post_output_path;
+  int fusion_post_err = system(fusion_post_cmd.c_str());
+  if(-1 == fusion_post_err)
+    cout << "error in fusion_post_cmd" << endl;
+  nowtime = time(NULL);
+  local = localtime(&nowtime);
+  tmpTimeStr = asctime(local);
+  tmpTimeStr = "[" + tmpTimeStr.substr(0, tmpTimeStr.length()-1) + "] ";
+  cout << endl << tmpTimeStr << "... fusion post analysis ends ......" << endl ;  
+  log_ofs << endl << tmpTimeStr << "... fusion post analysis ends ......" << endl ; 
+  runtime_log_ofs << endl << tmpTimeStr << "... fusion post analysis ends ......" << endl;
+  #endif
+
+
 	nowtime = time(NULL);
 	local = localtime(&nowtime);
 	tmpTimeStr = asctime(local);
