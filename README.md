@@ -82,28 +82,75 @@ bin/mps_regular_circRNA -G /PATH/index/ -1 /PATH/read_end1.fa -2 /PATH/read_end2
 Command Line:
 
 ```
+# Step 1
 bin/mps_regular_fusion -G <path-to-index> -1 <read-end1> -2 <read-end2> -T <threads-num> -O <output-folder>
+```
+```
+# Step 2
+bin/mps3_fusion_post_new \
+<path-to-index> \
+<output-folder-step1> \
+<path-to-gtf-file> \
+<threads-num> \
+<fusion-junc-read-support-min> \
+<path-to-paralog-gene-file> \
+<output-folder>
 ```
     
 Example:
     
 ```
+# Step 1
 bin/mps_regular_fusion -G /PATH/index/ -1 /PATH/read_end1.fa -2 /PATH/read_end2.fa -T 16 -O /PATH/mps3_results/
+```
+```
+# Step 2
+bin/mps3_fusion_post_new \
+/PATH/index/ \
+/PATH/step1_results/ \
+/PATH/gtf_file \
+16 \
+5 \
+/PATH/paralog_gene_file \
+/PATH/fusion_post_output/
 ```
 
 ### iv). map co-linear transcript, circualr RNA and gene fusion reads to detect co-linear splice junctions, back-splice junctions, and gene fusions
 Command Line:
 
 ```
+# Step 1
 bin/mps_regular_circRNA_fusion -G <path-to-index> -1 <read-end1> -2 <read-end2> -T <threads-num> -O <output-folder>
 ```
-    
+```
+# Step 2
+bin/mps3_fusion_post_new \
+<path-to-index> \
+<output-folder-step1> \
+<path-to-gtf-file> \
+<threads-num> \
+<fusion-junc-read-support-min> \
+<path-to-paralog-gene-file> \
+<output-folder>
+```
+
 Example:
     
 ```
+# Step 1
 bin/mps_regular_circRNA_fusion -G /PATH/index/ -1 /PATH/read_end1.fa -2 /PATH/read_end2.fa -T 16 -O /PATH/mps3_results/
 ```
-
+```
+# Step 2
+bin/mps3_fusion_post_new \
+/PATH/index/ \
+/PATH/step1_results/ \
+/PATH/gtf_file \
+16 \
+5 \
+/PATH/paralog_gene_file \
+/PATH/fusion_post_output/
+```
 <!---
 # How to interpret MapSplice3 results:
 
