@@ -44,25 +44,66 @@ Example:
 ./buildIndex /PATH/hg19/ /PATH/index/
 ```
 
-## 2. Map reads onto reference genome.
+## 2. Map reads onto reference genome and detect co-linear splice junctions, back-splice junctions (circular RNA), and gene fusions.
 
 Installation:
 
 Go to directory "mapping", and run "make mps".
 
-Running: all the parameters are required.
+Running: There are four modes in total. All the parameters are required for each mode.
 
+### i). map co-linear transcript reads only to detect co-linear splice junctions
 Command Line:
 
 ```
-./mps -G <path-to-index> -1 <read-end1> -2 <read-end2> -T <threads-num> -O <output-folder>
+bin/mps_regular -G <path-to-index> -1 <read-end1> -2 <read-end2> -T <threads-num> -O <output-folder>
 ```
     
 Example:
     
 ```
-./mps -G /PATH/index/ -1 /PATH/read_end1.fa -2 /PATH/read_end2.fa -T 16 -O /PATH/mps3_results/
+bin/mps_regular -G /PATH/index/ -1 /PATH/read_end1.fa -2 /PATH/read_end2.fa -T 16 -O /PATH/mps3_results/
 ```
+
+### ii). map co-linear transcript and circualr RNA reads to detect both co-linear splice junctions and back-splice junctions
+Command Line:
+
+```
+bin/mps_regular_circRNA -G <path-to-index> -1 <read-end1> -2 <read-end2> -T <threads-num> -O <output-folder>
+```
+    
+Example:
+    
+```
+bin/mps_regular_circRNA -G /PATH/index/ -1 /PATH/read_end1.fa -2 /PATH/read_end2.fa -T 16 -O /PATH/mps3_results/
+```
+
+### iii). map co-linear transcript and gene fusion reads to detect co-linear splice junctions and gene fusions
+Command Line:
+
+```
+bin/mps_regular_fusion -G <path-to-index> -1 <read-end1> -2 <read-end2> -T <threads-num> -O <output-folder>
+```
+    
+Example:
+    
+```
+bin/mps_regular_fusion -G /PATH/index/ -1 /PATH/read_end1.fa -2 /PATH/read_end2.fa -T 16 -O /PATH/mps3_results/
+```
+
+### iv). map co-linear transcript, circualr RNA and gene fusion reads to detect co-linear splice junctions, back-splice junctions, and gene fusions
+Command Line:
+
+```
+bin/mps_regular_circRNA_fusion -G <path-to-index> -1 <read-end1> -2 <read-end2> -T <threads-num> -O <output-folder>
+```
+    
+Example:
+    
+```
+bin/mps_regular_circRNA_fusion -G /PATH/index/ -1 /PATH/read_end1.fa -2 /PATH/read_end2.fa -T 16 -O /PATH/mps3_results/
+```
+
 <!---
 # How to interpret MapSplice3 results:
 
