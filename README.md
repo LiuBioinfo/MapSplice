@@ -151,6 +151,13 @@ bin/mps3_fusion_post_new \
 /PATH/paralog_gene_file \
 /PATH/fusion_post_output/
 ```
+### example files for gtf and paralog gene can be found in:
+gtf: https://drive.google.com/open?id=1f2G6fvVSRPekAPjdVnkCjNrAYGHz3-So
+
+paralog gene: https://drive.google.com/open?id=15bRelxlK7fxC6x9O-jvyFm2MUV8z9sns
+
+Users can also prepare and provide their own gtf and paralog gene files using the same format as in those example files.
+
 <!---
 # How to interpret MapSplice3 results:
 
