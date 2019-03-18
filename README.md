@@ -83,14 +83,14 @@ Command Line:
 
 ```
 # Step 1
-bin/mps_regular_fusion -G <path-to-index> -1 <read-end1> -2 <read-end2> -T <threads-num> -O <output-folder>
+bin/mps_regular_fusion -G <path-to-index> -1 <read-end1> -2 <read-end2> -T <threads-num> -O <output-folder> --fusion-post-gene-ann <path-to-gene-annotation-file> --fusion-post-paralog-gene <path-to-paralog-gene-file>
 ```
 ```
 # Step 2
 bin/mps3_fusion_post_new \
 <path-to-index> \
 <output-folder-step1> \
-<path-to-gtf-file> \
+<path-to-gene-annotation-file> \
 <threads-num> \
 <fusion-junc-read-support-min> \
 <path-to-paralog-gene-file> \
@@ -101,14 +101,14 @@ Example:
     
 ```
 # Step 1
-bin/mps_regular_fusion -G /PATH/index/ -1 /PATH/read_end1.fa -2 /PATH/read_end2.fa -T 16 -O /PATH/mps3_results/
+bin/mps_regular_fusion -G /PATH/index/ -1 /PATH/read_end1.fa -2 /PATH/read_end2.fa -T 16 -O /PATH/mps3_results/ --fusion-post-gene-ann /PATH/gene_annotation --fusion-post-paralog-gene /PATH/paralog_gene_file
 ```
 ```
 # Step 2
 bin/mps3_fusion_post_new \
 /PATH/index/ \
 /PATH/step1_results/ \
-/PATH/gtf_file \
+/PATH/gene_annotation \
 16 \
 5 \
 /PATH/paralog_gene_file \
@@ -120,14 +120,14 @@ Command Line:
 
 ```
 # Step 1
-bin/mps_regular_circRNA_fusion -G <path-to-index> -1 <read-end1> -2 <read-end2> -T <threads-num> -O <output-folder>
+bin/mps_regular_circRNA_fusion -G <path-to-index> -1 <read-end1> -2 <read-end2> -T <threads-num> -O <output-folder> --fusion-post-gene-ann <path-to-gene-annotation-file> --fusion-post-paralog-gene <path-to-paralog-gene-file>
 ```
 ```
 # Step 2
 bin/mps3_fusion_post_new \
 <path-to-index> \
 <output-folder-step1> \
-<path-to-gtf-file> \
+<path-to-gene-annotation-file> \
 <threads-num> \
 <fusion-junc-read-support-min> \
 <path-to-paralog-gene-file> \
@@ -138,23 +138,23 @@ Example:
     
 ```
 # Step 1
-bin/mps_regular_circRNA_fusion -G /PATH/index/ -1 /PATH/read_end1.fa -2 /PATH/read_end2.fa -T 16 -O /PATH/mps3_results/
+bin/mps_regular_circRNA_fusion -G /PATH/index/ -1 /PATH/read_end1.fa -2 /PATH/read_end2.fa -T 16 -O /PATH/mps3_results/ --fusion-post-gene-ann /PATH/gene_annotation --fusion-post-paralog-gene /PATH/paralog_gene_file
 ```
 ```
 # Step 2
 bin/mps3_fusion_post_new \
 /PATH/index/ \
 /PATH/step1_results/ \
-/PATH/gtf_file \
+/PATH/gene_annotation \
 16 \
 5 \
 /PATH/paralog_gene_file \
 /PATH/fusion_post_output/
 ```
-### example files for gtf and paralog gene can be found in:
-gtf: https://drive.google.com/open?id=1f2G6fvVSRPekAPjdVnkCjNrAYGHz3-So
+### example files for gene annotation and paralog gene can be found in:
+gene annotation file: https://drive.google.com/file/d/1J8fVELkXqtiAz_AYQoco22kVQoJlSWnt/view?usp=sharing
 
-paralog gene: https://drive.google.com/open?id=15bRelxlK7fxC6x9O-jvyFm2MUV8z9sns
+paralog gene file: https://drive.google.com/file/d/1bp1N5W7Rdn6A-mk8DGCFJaHamaVJcOd8/view?usp=sharing
 
 Users can also prepare and provide their own gtf and paralog gene files using the same format as in those example files.
 
