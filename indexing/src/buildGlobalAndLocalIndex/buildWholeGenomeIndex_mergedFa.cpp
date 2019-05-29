@@ -866,6 +866,8 @@ int main(int argc, char** argv)
 	log_ofs << "start to read merged fasta file" << endl;
 	string mergedFaFile = argv[1];
 	ifstream mergedFa_ifs(mergedFaFile.c_str());
+	
+	/*
 	while(!mergedFa_ifs.eof())
 	{
 		string tmpChrNameStr, tmpChrSeqStr;
@@ -878,6 +880,43 @@ int main(int argc, char** argv)
 		(buildIndexInfo->chromLengthVec).push_back(tmpChrSeqLength);
 		(buildIndexInfo->chromSeqVec).push_back(tmpChrSeqStr);
 	}
+	*/
+	
+	
+	string tmpChrNameStr, tmpChrSeqStr = "", line;
+	//First chromosome name
+	getline(mergedFa_ifs, line);
+	tmpChrNameStr = line + ".fa"; //acts as if reading name from individual file
+	//Getline until eof
+	while (getline(mergedFa_ifs, line)) {
+	    //eof?
+	    if (line == "")
+	        break;
+	        
+	    //Another sequence line
+	    if (line[0] != '>') {
+	        tmpChrSeqStr += line;
+	    }
+	    //New chromosome
+	    else {
+	        //Push back info for previous chromosome
+	        (buildIndexInfo->chrNameStrVec).push_back(tmpChrNameStr.substr(1));
+	        int tmpChrSeqLength = tmpChrSeqStr.length();
+		    (buildIndexInfo->chromLengthVec).push_back(tmpChrSeqLength);
+		    (buildIndexInfo->chromSeqVec).push_back(tmpChrSeqStr);
+		    
+		    //Set name for new chromosome and reset sequence
+	        tmpChrNameStr = line + ".fa"; //acts as if reading name from individual file
+	        tmpChrSeqStr = "";
+	    }
+	}
+	//Push back info for final chromosome
+	(buildIndexInfo->chrNameStrVec).push_back(tmpChrNameStr.substr(1));
+	int tmpChrSeqLength = tmpChrSeqStr.length();
+	(buildIndexInfo->chromLengthVec).push_back(tmpChrSeqLength);
+	(buildIndexInfo->chromSeqVec).push_back(tmpChrSeqStr);
+	
+	
 	mergedFa_ifs.close();
 	log_ofs << endl << " ****************   getChrEndPosVec() starts ... ***********************" << endl << endl;
 	buildIndexInfo->getChrEndPosVec(log_ofs);
