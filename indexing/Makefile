@@ -8,6 +8,7 @@ CFLAGS += $(OPTFLAGS) -fopenmp
 buildIndex:
 	g++  $(CFLAGS) -o $(OUTPUTDIR)buildIndex src/buildIndex.cpp
 	g++  $(CFLAGS) -o $(OUTPUTDIR)buildWholeGenome src/buildGlobalAndLocalIndex/buildWholeGenomeIndex.cpp
+	g++  $(CFLAGS) -o $(OUTPUTDIR)buildWholeGenome_mergedFa src/buildGlobalAndLocalIndex/buildWholeGenomeIndex_mergedFa.cpp
 	g++  $(CFLAGS) -o $(OUTPUTDIR)build2ndLevelIndex src/buildGlobalAndLocalIndex/buildAll2ndLevelIndex.cpp
 
 buildWholeGenome:
@@ -42,6 +43,7 @@ BeersGTF2GSNAPgtf:
 clean_buildIndex:
 	rm $(OUTPUTDIR)buildIndex
 	rm $(OUTPUTDIR)buildWholeGenome
+	rm $(OUTPUTDIR)buildWholeGenome_mergedFa
 	rm $(OUTPUTDIR)build2ndLevelIndex
 
 clean:

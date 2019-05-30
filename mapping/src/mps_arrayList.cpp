@@ -455,7 +455,7 @@ int main(int argc, char**argv)
 	runtime_log_ofs << endl << tmpTimeStr << "... all index loaded ......" << endl;	
 
 	//////////////////////////////////////////////////
-	HeaderSection_Info* headerSectionInfo = new HeaderSection_Info(indexInfo);	
+	HeaderSection_Info* headerSectionInfo = new HeaderSection_Info(optionInfo->dict_provided_bool, indexInfo, optionInfo->dict_file_path);	
 	/////////////////////////////////////   start to load annotation  /////////////////////////////////////
 	nowtime = time(NULL);
 	local = localtime(&nowtime);

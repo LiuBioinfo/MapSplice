@@ -34,6 +34,9 @@ public:
 
 	string annotation_file_path;
 	bool annotation_provided_bool;
+	
+	string dict_file_path;
+	bool dict_provided_bool;
 
 	string spliceJunctionAlignInferHash_file_path;
 	bool spliceJunctionAlignInferHash_provided_bool;
@@ -93,10 +96,11 @@ public:
 	
 	Option_Info()
 	{
-		optionStr = "W:1:2:S:G:L:T:F:O:M:I:Z:P:Q:R:U:Y:D:C:7:8:9:ABEXNJKH3456";
+		optionStr = "W:1:2:S:G:L:T:F:O:M:I:Z:P:Q:R:U:Y:D:C:7:8:9:V:ABEXNJKH3456";
 		SE_or_PE_bool = false;
 		Do_phase1_only_bool = false;
 		annotation_provided_bool = false;
+		dict_provided_bool = false;
 		spliceJunctionAlignInferHash_provided_bool = false;
 		realGenome_provided_bool = false;
 		transcript_provided_bool = false;
@@ -273,7 +277,7 @@ public:
 			{"read_singleEnd_path", 1, NULL, 'S'},
 			{"threads", 1, NULL, 'T'},
 			{"transcript_path", 1, NULL, 'U'},
-			// V
+			{"dict_path", 1, NULL, 'V'},
 			{"input_SAM_file_path", 1, NULL, 'W'},
 			{"sharing_splicing_context", 0, NULL, 'X'},
 			{"transcript_type", 1, NULL, 'Y'},
@@ -388,6 +392,10 @@ public:
 		    		annotation_file_path = optarg;
 		    		annotation_provided_bool = true;
 		    		break;
+		    	case 'V':
+		    	    dict_file_path = optarg;
+		    	    dict_provided_bool = true;
+		    	    break;
 		    	case 'Z':
 		    		spliceJunctionAlignInferHash_file_path = optarg;
 		    		spliceJunctionAlignInferHash_provided_bool = true;
@@ -674,7 +682,7 @@ public:
 
 	string optionInfoHelpStr()
 	{
-		string optionStr = "Processing Paired-end reads:\ncommand-line main arguments:\n-1 <string> path_to_read_file_end1\n-2 <string> path_to_read_file_end2\n-G <string> path_to_global_index\n-L <string> path_to_local_index\n-T <int> threads_num\n-O <string> path_to_output_folder\noptional arguments:\n-A Do_phase1_only\n-I annotation file\n-F <string> input_format_fasta_or_fastq\n-H command line help information\n";
+		string optionStr = "Processing Paired-end reads:\ncommand-line main arguments:\n-1 <string> path_to_read_file_end1\n-2 <string> path_to_read_file_end2\n-G <string> path_to_global_index\n-L <string> path_to_local_index\n-T <int> threads_num\n-O <string> path_to_output_folder\noptional arguments:\n-A Do_phase1_only\n-I annotation file\n-F <string> input_format_fasta_or_fastq\n-H command line help information\n-V dict file\n";
 		optionStr = optionStr + "Processing Single-end reads:\ncommand-line main arguments:\n-S <string> path_to_read_file_SE\n-G <string> path_to_global_index\n-L <string> path_to_local_index\n-T <int> threads_num\n-O <string> path_to_output_folder\noptional arguments:\n-A Do_phase1_only\n-I annotation file\n-F <string> input_format_fasta_or_fastq\n-H command line help information\n";
 		
 		return optionStr;
