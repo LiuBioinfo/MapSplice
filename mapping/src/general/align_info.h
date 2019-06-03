@@ -3169,6 +3169,37 @@ public:
 
 		return flagInt;
 	}
+	
+	//Returns the value for BC tag
+	string getBarcodeFromReadname(const string &readName) {
+	    string BCstr = readName;
+	    int pos;
+	
+	    //everything after last colon
+	    if ((pos = BCstr.rfind(":")) != string::npos) {
+	        BCstr = BCstr.substr(pos+1);
+	    }
+	    
+	    //replace all + with -
+	    while ((pos = BCstr.find("+")) != string::npos) {
+	        BCstr.replace(pos, 1, "-");
+	    }
+	    
+	    return BCstr;
+	}
+	
+	//Returns QNAME value (readName before first space)
+	string getQnameFromReadname(const string &readName) {
+	    string QNAME = readName;
+	    int pos;
+	    
+	    //everything before space
+	    if ((pos = QNAME.find(" ")) != string::npos) {
+	        QNAME = QNAME.substr(0, pos);
+	    }
+	    
+	    return QNAME;
+	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////
@@ -3326,9 +3357,11 @@ public:
 		mismatchNumStr = int_to_str(mismatchNum);
 		IHstr = int_to_str(IH_num);
 		HIstr = int_to_str(HI_num);
+        
+        string QNAME = getQnameFromReadname(readName);
+        string BCstr = getBarcodeFromReadname(readName);
 
-
-		samString = readName + "\t" 
+		samString = QNAME + "\t" 
 			+ FLAGstr + "\t" 
 			+ RNAME + "\t"
 			+ POSstr + "\t" 
@@ -3339,6 +3372,7 @@ public:
 			+ TLENstr + "\t" 
 			+ readSeq + "\t" 
 			+ qualitySeq 
+			+ "\tBC:Z:" + BCstr
 			+ "\tNM:i:" + mismatchNumStr 
 			+ "\tIH:i:" + IHstr
 			+ "\tHI:i:" + HIstr
@@ -3428,9 +3462,13 @@ public:
 		IHstr = int_to_str(IH_num);
 		HIstr = int_to_str(HI_num);		
 		string XMstr = int_to_str(multiMapSeg_maxLength);
+		
+		string QNAME = getQnameFromReadname(readName);
+        string BCstr = getBarcodeFromReadname(readName);
 
-		samString = readName + "\t" + FLAGstr + "\t" + RNAME + "\t" + POSstr + "\t" + MAPQstr + "\t" 
+		samString = QNAME + "\t" + FLAGstr + "\t" + RNAME + "\t" + POSstr + "\t" + MAPQstr + "\t" 
 			+ CIGAR + "\t" + RNEXT + "\t" + PNEXTstr + "\t" + TLENstr + "\t" + readSeq + "\t" + qualitySeq 
+			+ "\tBC:Z:" + BCstr;
 			+ "\tNM:i:" + mismatchNumStr + "\tIH:i:" + IHstr + "\tHI:i:" + HIstr 
 			+ "\tXM:i:" + XMstr
 			+ "\tXS:A:" + strandStr;
@@ -3520,9 +3558,13 @@ public:
 		IHstr = int_to_str(IH_num);
 		HIstr = int_to_str(HI_num);		
 		string XMstr = int_to_str(multiMapSeg_maxLength);
+		
+		string QNAME = getQnameFromReadname(readName);
+        string BCstr = getBarcodeFromReadname(readName);
 
-		samString = readName + "\t" + FLAGstr + "\t" + RNAME + "\t" + POSstr + "\t" + MAPQstr + "\t" 
+		samString = QNAME + "\t" + FLAGstr + "\t" + RNAME + "\t" + POSstr + "\t" + MAPQstr + "\t" 
 			+ CIGAR + "\t" + RNEXT + "\t" + PNEXTstr + "\t" + TLENstr + "\t" + readSeq + "\t" + qualitySeq 
+			+ "\tBC:Z:" + BCstr
 			+ "\tNM:i:" + mismatchNumStr + "\tIH:i:" + IHstr + "\tHI:i:" + HIstr 
 			+ "\tXM:i:" + XMstr
 			+ "\tXS:A:" + strandStr;
@@ -3674,8 +3716,11 @@ public:
 		IHstr = int_to_str(IH_num);
 		HIstr = int_to_str(HI_num);
 		string XMstr = int_to_str(multiMapSeg_maxLength);
+		
+		string QNAME = getQnameFromReadname(readName);
+        string BCstr = getBarcodeFromReadname(readName);
 
-		samString = readName + "\t" 
+		samString = QNAME + "\t" 
 			+ 
 				FLAGstr + "\t" 
 			+ RNAME + "\t"
@@ -3687,6 +3732,7 @@ public:
 			+ TLENstr + "\t" 
 			+ readSeq + "\t" 
 			+ qualitySeq 
+			+ "\tBC:Z:" + BCstr
 			+ "\tNM:i:" + mismatchNumStr 
 			+ "\tIH:i:" + IHstr
 			+ "\tHI:i:" + HIstr
@@ -3800,8 +3846,11 @@ public:
 		IHstr = int_to_str(IH_num);
 		HIstr = int_to_str(HI_num);
 		string XMstr = int_to_str(multiMapSeg_maxLength);
+		
+		string QNAME = getQnameFromReadname(readName);
+        string BCstr = getBarcodeFromReadname(readName);
 
-		samString = readName + "\t" 
+		samString = QNAME + "\t" 
 			+ 
 				FLAGstr + "\t" 
 			+ RNAME + "\t"
@@ -3813,6 +3862,7 @@ public:
 			+ TLENstr + "\t" 
 			+ readSeq + "\t" 
 			+ qualitySeq 
+			+ "\tBC:Z:" + BCstr
 			+ "\tNM:i:" + mismatchNumStr 
 			+ "\tIH:i:" + IHstr
 			+ "\tHI:i:" + HIstr
