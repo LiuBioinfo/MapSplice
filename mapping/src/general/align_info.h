@@ -1444,6 +1444,7 @@ public:
 			0, ((pathInfo->returnSpliceInfoInFinalPathVec(tmpPath))->final_jump_code).size()-1,
 			((pathInfo->returnSpliceInfoInFinalPathVec(tmpPath))->final_jump_code));
 
+        this->jumpCodeVec2spliceJunctionVec(indexInfo);
 		if(STORE_MISMATCH_POS)
 		{
 			this->generateNewMismatchPosVec_new(pathInfo->fixedPathMismatchPosVec[tmpPath], alignInfo, midPartStartLocInRead);
@@ -2965,7 +2966,7 @@ public:
 				if(currentStrand == "-")
 					return "X";
 				else
-					return "+";
+					currentStrand = "+";
 			}
 		}
 		return currentStrand;
