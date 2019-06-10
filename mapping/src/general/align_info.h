@@ -3170,7 +3170,7 @@ public:
 		return flagInt;
 	}
 	
-	//Returns the value for BC tag
+	//Returns the value for BC tag (currently unused, only works with one type of Illumina readname format)
 	string getBarcodeFromReadname(const string &readName) {
 	    string BCstr = readName;
 	    int pos;
@@ -3372,7 +3372,7 @@ public:
 			+ TLENstr + "\t" 
 			+ readSeq + "\t" 
 			+ qualitySeq 
-			+ "\tBC:Z:" + BCstr
+			//+ "\tBC:Z:" + BCstr
 			+ "\tNM:i:" + mismatchNumStr 
 			+ "\tIH:i:" + IHstr
 			+ "\tHI:i:" + HIstr
@@ -3468,7 +3468,7 @@ public:
 
 		samString = QNAME + "\t" + FLAGstr + "\t" + RNAME + "\t" + POSstr + "\t" + MAPQstr + "\t" 
 			+ CIGAR + "\t" + RNEXT + "\t" + PNEXTstr + "\t" + TLENstr + "\t" + readSeq + "\t" + qualitySeq 
-			+ "\tBC:Z:" + BCstr;
+			//+ "\tBC:Z:" + BCstr;
 			+ "\tNM:i:" + mismatchNumStr + "\tIH:i:" + IHstr + "\tHI:i:" + HIstr 
 			+ "\tXM:i:" + XMstr
 			+ "\tXS:A:" + strandStr;
@@ -3564,7 +3564,7 @@ public:
 
 		samString = QNAME + "\t" + FLAGstr + "\t" + RNAME + "\t" + POSstr + "\t" + MAPQstr + "\t" 
 			+ CIGAR + "\t" + RNEXT + "\t" + PNEXTstr + "\t" + TLENstr + "\t" + readSeq + "\t" + qualitySeq 
-			+ "\tBC:Z:" + BCstr
+			//+ "\tBC:Z:" + BCstr
 			+ "\tNM:i:" + mismatchNumStr + "\tIH:i:" + IHstr + "\tHI:i:" + HIstr 
 			+ "\tXM:i:" + XMstr
 			+ "\tXS:A:" + strandStr;
@@ -3732,7 +3732,7 @@ public:
 			+ TLENstr + "\t" 
 			+ readSeq + "\t" 
 			+ qualitySeq 
-			+ "\tBC:Z:" + BCstr
+			//+ "\tBC:Z:" + BCstr
 			+ "\tNM:i:" + mismatchNumStr 
 			+ "\tIH:i:" + IHstr
 			+ "\tHI:i:" + HIstr
@@ -3862,7 +3862,7 @@ public:
 			+ TLENstr + "\t" 
 			+ readSeq + "\t" 
 			+ qualitySeq 
-			+ "\tBC:Z:" + BCstr
+			//+ "\tBC:Z:" + BCstr
 			+ "\tNM:i:" + mismatchNumStr 
 			+ "\tIH:i:" + IHstr
 			+ "\tHI:i:" + HIstr
