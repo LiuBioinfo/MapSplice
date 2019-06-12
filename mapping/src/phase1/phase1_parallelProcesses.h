@@ -4,6 +4,15 @@
 
 using namespace std;
 
+//Truncates read name to just the part before first whitespace (for Cufflinks compatibility)
+//Performed by default, command line option --keepFullReadName overrides this
+void truncateReadName(string &readName) {
+    int pos;
+    if ((pos = readName.find(" ")) != string::npos) {
+        readName = readName.substr(0, pos);
+    }
+}
+
 void process_function_phase1(
 	Read_Array_Queue* readArrayQueue, Result_Array* tmpResultArray,
 	int tmpBatchArraySize, int threadNumForProcess, unsigned int* sa, 
@@ -128,7 +137,8 @@ void io_stage_phase1_separateThreadForIO(ifstream& input_ifs_1,
 	ofstream& output_log_ofs,
 	bool fasta_or_fastq_bool,
 	bool SE_or_PE_bool,
-	int& tmp_total_read_num
+	int& tmp_total_read_num,
+	bool keepFullReadName_bool
 	)
 {
 	time_t nowtime;
@@ -150,6 +160,12 @@ void io_stage_phase1_separateThreadForIO(ifstream& input_ifs_1,
 	getline(input_ifs_1, readSeqStr_1);
 	getline(input_ifs_2, readNameStr_2);
 	getline(input_ifs_2, readSeqStr_2);
+	
+	if (!keepFullReadName_bool) {
+	    truncateReadName(readNameStr_1);
+	    truncateReadName(readNameStr_2);
+	}
+	
 	if(fasta_or_fastq_bool)
 	{	
 		readArrayQueue->initiateWith1stRead(readNameStr_1, readNameStr_2, readSeqStr_1, readSeqStr_2, input_log_ofs);
@@ -191,6 +207,12 @@ void io_stage_phase1_separateThreadForIO(ifstream& input_ifs_1,
 				string tmpReadName_1, tmpReadName_2;
 				getline(input_ifs_1, tmpReadName_1);
 				getline(input_ifs_2, tmpReadName_2); 
+				
+				if (!keepFullReadName_bool) {
+	                truncateReadName(tmpReadName_1);
+	                truncateReadName(tmpReadName_2);
+	            }
+				
 				if((input_ifs_1.eof())||(input_ifs_2.eof())||(tmpReadName_1 == "")||(tmpReadName_2 == ""))
 				{
 					input_stage_end_bool = true;
@@ -450,7 +472,8 @@ void io_process_phase1_allThreadsSharedByBothStage(
 	char* chrom_SNP, BYTE* verifyChild_SNP, Index_Info* indexInfo_SNP, 
 	int SNPlocInSyntheticSNPseq, bool do_segMap2snpMer_bool,
 	LearnedCandiSNPhash_Info_Vec& mismatchHashInfoVec,
-	bool collectMismatchfromAlignment_bool, int& tmp_total_read_num)
+	bool collectMismatchfromAlignment_bool, int& tmp_total_read_num,
+	bool keepFullReadName_bool)
 {
 	int tmpBatchIndex = 0;
 	time_t nowtime;
@@ -484,6 +507,12 @@ void io_process_phase1_allThreadsSharedByBothStage(
 			string tmpReadName_1, tmpReadName_2;
 			getline(input_ifs_1, tmpReadName_1);
 			getline(input_ifs_2, tmpReadName_2);
+			
+			if (!keepFullReadName_bool) {
+	            truncateReadName(tmpReadName_1);
+	            truncateReadName(tmpReadName_2);
+	        }
+			
 			if((input_ifs_1.eof())||(input_ifs_2.eof()))
 			{
 				nowtime = time(NULL);

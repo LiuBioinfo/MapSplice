@@ -86,6 +86,8 @@ public:
 
 	bool keep_tmp_bool;
 	
+	bool keepFullReadName_bool;
+	
 	int fusion_post_sup_min;
 	
 	string fusion_post_formatted_gtf_path;
@@ -96,7 +98,7 @@ public:
 	
 	Option_Info()
 	{
-		optionStr = "W:1:2:S:G:L:T:F:O:M:I:Z:P:Q:R:U:Y:D:C:7:8:9:V:ABEXNJKH3456";
+		optionStr = "W:1:2:S:G:L:T:F:O:M:I:Z:P:Q:R:U:Y:D:C:7:8:9:V:ABEXNJKH3456a";
 		SE_or_PE_bool = false;
 		Do_phase1_only_bool = false;
 		annotation_provided_bool = false;
@@ -119,6 +121,7 @@ public:
 		stopLearningSNP_bool = false;
 		stopLearningSplicing_bool = false;
 		updateChrSeqWithSNPonly_avoidSegMap2SNPmer_bool = false;
+		keepFullReadName_bool = false;
 
 		backSplice_search_bool = false;
 		#ifdef DETECT_CIRCULAR_RNA
@@ -292,6 +295,7 @@ public:
 			{"fusion-post-gene-ann", 1, NULL, '8'},
 			{"fusion-post-paralog-gene", 1, NULL, '9'},
 			{NULL, 0, NULL, 0},
+			{"keepFullReadName", 0, NULL, 'a'},
 		};		
 		char ch;
 		string threadsStr, formatStr, min_mapped_perc_str, optargStr, SNPmerMap_phase_str, 
@@ -507,7 +511,10 @@ public:
 			    case '9':
 					fusion_post_paralog_gene_path = optarg;
 			    	fusion_post_paralog_gene_provided_bool = true;
-			    	break;			
+			    	break;		
+			    case 'a':
+			        keepFullReadName_bool = true;
+			        break;	
 			    default:
 			        printf("other option:%c\n",ch);
 		    }

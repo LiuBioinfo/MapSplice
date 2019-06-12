@@ -3187,19 +3187,6 @@ public:
 	    
 	    return BCstr;
 	}
-	
-	//Returns QNAME value (readName before first space)
-	string getQnameFromReadname(const string &readName) {
-	    string QNAME = readName;
-	    int pos;
-	    
-	    //everything before space
-	    if ((pos = QNAME.find(" ")) != string::npos) {
-	        QNAME = QNAME.substr(0, pos);
-	    }
-	    
-	    return QNAME;
-	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////
@@ -3358,10 +3345,9 @@ public:
 		IHstr = int_to_str(IH_num);
 		HIstr = int_to_str(HI_num);
         
-        string QNAME = getQnameFromReadname(readName);
         string BCstr = getBarcodeFromReadname(readName);
 
-		samString = QNAME + "\t" 
+		samString = readName + "\t" 
 			+ FLAGstr + "\t" 
 			+ RNAME + "\t"
 			+ POSstr + "\t" 
@@ -3463,10 +3449,9 @@ public:
 		HIstr = int_to_str(HI_num);		
 		string XMstr = int_to_str(multiMapSeg_maxLength);
 		
-		string QNAME = getQnameFromReadname(readName);
         string BCstr = getBarcodeFromReadname(readName);
 
-		samString = QNAME + "\t" + FLAGstr + "\t" + RNAME + "\t" + POSstr + "\t" + MAPQstr + "\t" 
+		samString = readName + "\t" + FLAGstr + "\t" + RNAME + "\t" + POSstr + "\t" + MAPQstr + "\t" 
 			+ CIGAR + "\t" + RNEXT + "\t" + PNEXTstr + "\t" + TLENstr + "\t" + readSeq + "\t" + qualitySeq 
 			//+ "\tBC:Z:" + BCstr;
 			+ "\tNM:i:" + mismatchNumStr + "\tIH:i:" + IHstr + "\tHI:i:" + HIstr 
@@ -3559,10 +3544,9 @@ public:
 		HIstr = int_to_str(HI_num);		
 		string XMstr = int_to_str(multiMapSeg_maxLength);
 		
-		string QNAME = getQnameFromReadname(readName);
         string BCstr = getBarcodeFromReadname(readName);
 
-		samString = QNAME + "\t" + FLAGstr + "\t" + RNAME + "\t" + POSstr + "\t" + MAPQstr + "\t" 
+		samString = readName + "\t" + FLAGstr + "\t" + RNAME + "\t" + POSstr + "\t" + MAPQstr + "\t" 
 			+ CIGAR + "\t" + RNEXT + "\t" + PNEXTstr + "\t" + TLENstr + "\t" + readSeq + "\t" + qualitySeq 
 			//+ "\tBC:Z:" + BCstr
 			+ "\tNM:i:" + mismatchNumStr + "\tIH:i:" + IHstr + "\tHI:i:" + HIstr 
@@ -3717,10 +3701,9 @@ public:
 		HIstr = int_to_str(HI_num);
 		string XMstr = int_to_str(multiMapSeg_maxLength);
 		
-		string QNAME = getQnameFromReadname(readName);
         string BCstr = getBarcodeFromReadname(readName);
 
-		samString = QNAME + "\t" 
+		samString = readName + "\t" 
 			+ 
 				FLAGstr + "\t" 
 			+ RNAME + "\t"
@@ -3847,10 +3830,9 @@ public:
 		HIstr = int_to_str(HI_num);
 		string XMstr = int_to_str(multiMapSeg_maxLength);
 		
-		string QNAME = getQnameFromReadname(readName);
         string BCstr = getBarcodeFromReadname(readName);
 
-		samString = QNAME + "\t" 
+		samString = readName + "\t" 
 			+ 
 				FLAGstr + "\t" 
 			+ RNAME + "\t"
