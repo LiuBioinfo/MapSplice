@@ -1444,6 +1444,7 @@ public:
 			0, ((pathInfo->returnSpliceInfoInFinalPathVec(tmpPath))->final_jump_code).size()-1,
 			((pathInfo->returnSpliceInfoInFinalPathVec(tmpPath))->final_jump_code));
 
+        this->jumpCodeVec2spliceJunctionVec(indexInfo);
 		if(STORE_MISMATCH_POS)
 		{
 			this->generateNewMismatchPosVec_new(pathInfo->fixedPathMismatchPosVec[tmpPath], alignInfo, midPartStartLocInRead);
@@ -2965,7 +2966,7 @@ public:
 				if(currentStrand == "-")
 					return "X";
 				else
-					return "+";
+					currentStrand = "+";
 			}
 		}
 		return currentStrand;
@@ -3168,6 +3169,24 @@ public:
 
 		return flagInt;
 	}
+	
+	//Returns the value for BC tag (currently unused, only works with one type of Illumina readname format)
+	string getBarcodeFromReadname(const string &readName) {
+	    string BCstr = readName;
+	    int pos;
+	
+	    //everything after last colon
+	    if ((pos = BCstr.rfind(":")) != string::npos) {
+	        BCstr = BCstr.substr(pos+1);
+	    }
+	    
+	    //replace all + with -
+	    while ((pos = BCstr.find("+")) != string::npos) {
+	        BCstr.replace(pos, 1, "-");
+	    }
+	    
+	    return BCstr;
+	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////
@@ -3325,7 +3344,8 @@ public:
 		mismatchNumStr = int_to_str(mismatchNum);
 		IHstr = int_to_str(IH_num);
 		HIstr = int_to_str(HI_num);
-
+        
+        string BCstr = getBarcodeFromReadname(readName);
 
 		samString = readName + "\t" 
 			+ FLAGstr + "\t" 
@@ -3338,6 +3358,7 @@ public:
 			+ TLENstr + "\t" 
 			+ readSeq + "\t" 
 			+ qualitySeq 
+			//+ "\tBC:Z:" + BCstr
 			+ "\tNM:i:" + mismatchNumStr 
 			+ "\tIH:i:" + IHstr
 			+ "\tHI:i:" + HIstr
@@ -3427,9 +3448,12 @@ public:
 		IHstr = int_to_str(IH_num);
 		HIstr = int_to_str(HI_num);		
 		string XMstr = int_to_str(multiMapSeg_maxLength);
+		
+        string BCstr = getBarcodeFromReadname(readName);
 
 		samString = readName + "\t" + FLAGstr + "\t" + RNAME + "\t" + POSstr + "\t" + MAPQstr + "\t" 
 			+ CIGAR + "\t" + RNEXT + "\t" + PNEXTstr + "\t" + TLENstr + "\t" + readSeq + "\t" + qualitySeq 
+			//+ "\tBC:Z:" + BCstr;
 			+ "\tNM:i:" + mismatchNumStr + "\tIH:i:" + IHstr + "\tHI:i:" + HIstr 
 			+ "\tXM:i:" + XMstr
 			+ "\tXS:A:" + strandStr;
@@ -3519,9 +3543,12 @@ public:
 		IHstr = int_to_str(IH_num);
 		HIstr = int_to_str(HI_num);		
 		string XMstr = int_to_str(multiMapSeg_maxLength);
+		
+        string BCstr = getBarcodeFromReadname(readName);
 
 		samString = readName + "\t" + FLAGstr + "\t" + RNAME + "\t" + POSstr + "\t" + MAPQstr + "\t" 
 			+ CIGAR + "\t" + RNEXT + "\t" + PNEXTstr + "\t" + TLENstr + "\t" + readSeq + "\t" + qualitySeq 
+			//+ "\tBC:Z:" + BCstr
 			+ "\tNM:i:" + mismatchNumStr + "\tIH:i:" + IHstr + "\tHI:i:" + HIstr 
 			+ "\tXM:i:" + XMstr
 			+ "\tXS:A:" + strandStr;
@@ -3673,6 +3700,8 @@ public:
 		IHstr = int_to_str(IH_num);
 		HIstr = int_to_str(HI_num);
 		string XMstr = int_to_str(multiMapSeg_maxLength);
+		
+        string BCstr = getBarcodeFromReadname(readName);
 
 		samString = readName + "\t" 
 			+ 
@@ -3686,6 +3715,7 @@ public:
 			+ TLENstr + "\t" 
 			+ readSeq + "\t" 
 			+ qualitySeq 
+			//+ "\tBC:Z:" + BCstr
 			+ "\tNM:i:" + mismatchNumStr 
 			+ "\tIH:i:" + IHstr
 			+ "\tHI:i:" + HIstr
@@ -3799,6 +3829,8 @@ public:
 		IHstr = int_to_str(IH_num);
 		HIstr = int_to_str(HI_num);
 		string XMstr = int_to_str(multiMapSeg_maxLength);
+		
+        string BCstr = getBarcodeFromReadname(readName);
 
 		samString = readName + "\t" 
 			+ 
@@ -3812,6 +3844,7 @@ public:
 			+ TLENstr + "\t" 
 			+ readSeq + "\t" 
 			+ qualitySeq 
+			//+ "\tBC:Z:" + BCstr
 			+ "\tNM:i:" + mismatchNumStr 
 			+ "\tIH:i:" + IHstr
 			+ "\tHI:i:" + HIstr

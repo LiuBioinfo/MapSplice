@@ -322,6 +322,7 @@ int main(int argc, char**argv)
 	//Do_fixHeadTail_extend2end_finalStep = false;
 	bool Do_fixHeadTail_extend2end_fixIndel = true;
 	//Do_fixHeadTail_extend2end_fixIndel = false;
+	bool keepFullReadName_bool = optionInfo->keepFullReadName_bool;
 
 	// Fix ME:
 	// #ifdef DETECT_CIRCULAR_RNA
@@ -678,7 +679,7 @@ int main(int argc, char**argv)
 					tmpInputReadNumInBatchArray_phase1, tmpInputTimeWeight_phase1, tmpOutputTimeWeigth_phase1, log_ofs, readPreProcessInfo,
 					tmpAlignCompleteRead_ofs, tmpAlignIncompletePair_ofs, tmpAlignOneEndUnmapped_ofs, tmpAlignBothEndsUnmapped_ofs,
 					tmpAlignBothEndsUnmapped_lowScore_ofs, tmpAlignBothEndsUnmapped_mappedToRepeatRegionFile_ofs,
-					tmpAlignIncompletePair_SAM_ofs, input_log_ofs_phase1, output_log_ofs_phase1, fasta_or_fastq_bool, SE_or_PE_bool, readTotalNum);
+					tmpAlignIncompletePair_SAM_ofs, input_log_ofs_phase1, output_log_ofs_phase1, fasta_or_fastq_bool, SE_or_PE_bool, readTotalNum, keepFullReadName_bool);
 	#pragma omp section
 				process_stage_phase1_separateThreadForIO(readArrayQueue, resultArrayQueue, endOfFile_bool, endOfProcessing_bool, threads_num-1, 
 					sa, lcpCompress, childTab, chrom, verifyChild, indexInfo, preIndexMapLengthArray, preIndexIntervalStartArray,
@@ -699,7 +700,7 @@ int main(int argc, char**argv)
 			preIndexIntervalStartArray, preIndexIntervalEndArray, repeatRegionInfoVec, Do_cirRNA, Do_extendHeadTail_phase1, annotation_provided_bool, 
 			Do_annotation_only_bool, annotationInfo, outputDirectlyBool_Phase1Only, Do_Phase1_Only,	statsInfo, mapping_log_ofs_phase1, 
 			checkQualSeqForReadSegSeq, sa_SNP, lcpCompress_SNP, childTab_SNP, chrom_SNP, verifyChild_SNP, indexInfo_SNP, 
-			SNPlocInSyntheticSNPseq, segMap2SNPmer_phase1_bool, mismatchHashInfoVec, segMap2SNPmer_phase2_bool_learned, readTotalNum);
+			SNPlocInSyntheticSNPseq, segMap2SNPmer_phase1_bool, mismatchHashInfoVec, segMap2SNPmer_phase2_bool_learned, readTotalNum, keepFullReadName_bool);
 	}
 	//log_ofs << "perfectMatch_pair #: " << perfectMatch_pair << endl;
 	repeatRegionFile_ofs << "Repeat Region Info: size = " << repeatRegionInfoVec.size() << endl;
